@@ -39,3 +39,15 @@ def make_cache(
     if kind == "h2o":
         return H2OCache.from_config(config, batch_size, kw["budget"], kw["recent"], dtype, device)
     raise ValueError(f"unknown cache type: {kind}")
+
+
+def resolve_spec(spec: dict, length: int) -> dict:
+    """Turn budget_frac / recent_frac into absolute token budgets for a prompt of `length` tokens."""
+    s = dict(spec)
+    frac = s.pop("budget_frac", None)
+    rfrac = s.pop("recent_frac", None)
+    if frac is not None:
+        s["budget"] = max(1, int(length * frac))
+        if rfrac is not None:
+            s["recent"] = int(s["budget"] * rfrac)
+    return s

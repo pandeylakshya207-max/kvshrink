@@ -1,0 +1,58 @@
+model: Qwen/Qwen2.5-0.5B-Instruct
+dtype: float16
+seed: 0
+n_per_task: 30
+max_input_tokens: 7500
+prefill_chunk: 512
+tasks:
+  qasper:
+    metric: qa_f1
+    max_gen: 128
+    prompt: "You are given a scientific article and a question. Answer the question as concisely as you can, using a single phrase or sentence if possible. If the question cannot be answered based on the information in the article, write \"unanswerable\". If the question is a yes/no question, answer \"yes\", \"no\", or \"unanswerable\". Do not provide any explanation.\n\nArticle: {context}\n\n Answer the question based on the above article as concisely as you can, using a single phrase or sentence if possible. If the question cannot be answered based on the information in the article, write \"unanswerable\". If the question is a yes/no question, answer \"yes\", \"no\", or \"unanswerable\". Do not provide any explanation.\n\nQuestion: {input}\n\nAnswer:"
+  hotpotqa:
+    metric: qa_f1
+    max_gen: 32
+    prompt: "Answer the question based on the given passages. Only give me the answer and do not output any other words.\n\nThe following are given passages.\n{context}\n\nAnswer the question based on the given passages. Only give me the answer and do not output any other words.\n\nQuestion: {input}\nAnswer:"
+  triviaqa:
+    metric: qa_f1
+    max_gen: 32
+    first_line: true
+    prompt: "Answer the question based on the given passage. Only give me the answer and do not output any other words. The following are some examples.\n\n{context}\n\n{input}"
+  passage_retrieval_en:
+    metric: retrieval
+    max_gen: 32
+    prompt: "Here are 30 paragraphs from Wikipedia, along with an abstract. Please determine which paragraph the abstract is from.\n\n{context}\n\nThe following is an abstract.\n\n{input}\n\nPlease enter the number of the paragraph that the abstract is from. The answer format must be like \"Paragraph 1\", \"Paragraph 2\", etc.\n\nThe answer is: "
+methods:
+  full:
+    type: full
+  int8:
+    type: quant
+    key_bits: 8
+    value_bits: 8
+  kivi4:
+    type: kivi
+    bits: 4
+    group_size: 32
+    residual: 128
+  kivi2:
+    type: kivi
+    bits: 2
+    group_size: 32
+    residual: 128
+  stream50:
+    type: streaming
+    budget_frac: 0.5
+    sink: 4
+  stream25:
+    type: streaming
+    budget_frac: 0.25
+    sink: 4
+  h2o50:
+    type: h2o
+    budget_frac: 0.5
+    recent_frac: 0.5
+  h2o25:
+    type: h2o
+    budget_frac: 0.25
+    recent_frac: 0.5
+output: results/longbench_0.5b
