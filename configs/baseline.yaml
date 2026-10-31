@@ -1,0 +1,14 @@
+model: Qwen/Qwen2.5-0.5B-Instruct
+dtype: float16
+seed: 0
+kv_probe_tokens: 8192
+latency:
+  context_lengths: [512, 2048, 4096, 8192]
+  decode_tokens: 128
+  warmup: 1
+  repeats: 3
+capacity:
+  context_lengths: [4096, 8192]
+  decode_steps: 8
+  max_batch: 2048
+output: results/baseline
