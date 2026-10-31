@@ -1,0 +1,111 @@
+{
+  "model": "Qwen/Qwen2.5-0.5B-Instruct",
+  "config": {
+    "model": "Qwen/Qwen2.5-0.5B-Instruct",
+    "dtype": "float16",
+    "dataset": {
+      "name": "Salesforce/wikitext",
+      "config": "wikitext-2-raw-v1",
+      "split": "test"
+    },
+    "window": 2048,
+    "prefix": 128,
+    "chunk": 16,
+    "num_windows": 16,
+    "batch_size": 8,
+    "methods": {
+      "full": {
+        "type": "full"
+      },
+      "int8": {
+        "type": "quant",
+        "key_bits": 8,
+        "value_bits": 8
+      },
+      "kivi4": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128
+      },
+      "kivi2": {
+        "type": "kivi",
+        "bits": 2,
+        "group_size": 32,
+        "residual": 128
+      }
+    },
+    "output": "results/ppl_0.5b"
+  },
+  "env": {
+    "gpu": "Tesla T4",
+    "torch": "2.11.0+cu130",
+    "transformers": "5.22.1",
+    "python": "3.13.16",
+    "timestamp": "2026-10-31T16:14:40+00:00"
+  },
+  "n_windows": 16,
+  "scored_tokens_per_window": 1920,
+  "methods": {
+    "full": {
+      "spec": {
+        "type": "full"
+      },
+      "ppl": 13.089626613422613,
+      "nll_per_token": 2.57182005494833,
+      "scored_tokens": 30720,
+      "kv_bytes_per_token": 12288.0,
+      "peak_allocated_mib": 1412.88671875,
+      "seconds": 8.37289794100002,
+      "delta_ppl": 0.0,
+      "compression": 1.0
+    },
+    "int8": {
+      "spec": {
+        "type": "quant",
+        "key_bits": 8,
+        "value_bits": 8
+      },
+      "ppl": 13.187978533532075,
+      "nll_per_token": 2.5793056974808377,
+      "scored_tokens": 30720,
+      "kv_bytes_per_token": 6528.0,
+      "peak_allocated_mib": 1322.88671875,
+      "seconds": 15.004994906999968,
+      "delta_ppl": 0.09835192010946159,
+      "compression": 1.8823529411764706
+    },
+    "kivi4": {
+      "spec": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128
+      },
+      "ppl": 13.143007283191931,
+      "nll_per_token": 2.575889851649602,
+      "scored_tokens": 30720,
+      "kv_bytes_per_token": 4368.0,
+      "peak_allocated_mib": 1293.63671875,
+      "seconds": 14.552356628000041,
+      "delta_ppl": 0.05338066976931799,
+      "compression": 2.8131868131868134
+    },
+    "kivi2": {
+      "spec": {
+        "type": "kivi",
+        "bits": 2,
+        "group_size": 32,
+        "residual": 128
+      },
+      "ppl": 16.613854837976916,
+      "nll_per_token": 2.810236976047357,
+      "scored_tokens": 30720,
+      "kv_bytes_per_token": 2928.0,
+      "peak_allocated_mib": 1269.63671875,
+      "seconds": 15.771711333999974,
+      "delta_ppl": 3.524228224554303,
+      "compression": 4.19672131147541
+    }
+  }
+}
