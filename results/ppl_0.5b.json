@@ -33,6 +33,26 @@
         "bits": 2,
         "group_size": 32,
         "residual": 128
+      },
+      "stream1024": {
+        "type": "streaming",
+        "budget": 1024,
+        "sink": 4
+      },
+      "stream512": {
+        "type": "streaming",
+        "budget": 512,
+        "sink": 4
+      },
+      "h2o1024": {
+        "type": "h2o",
+        "budget": 1024,
+        "recent": 512
+      },
+      "h2o512": {
+        "type": "h2o",
+        "budget": 512,
+        "recent": 256
       }
     },
     "output": "results/ppl_0.5b"
@@ -42,7 +62,7 @@
     "torch": "2.11.0+cu130",
     "transformers": "5.22.1",
     "python": "3.13.16",
-    "timestamp": "2026-10-31T16:14:40+00:00"
+    "timestamp": "2026-10-31T16:32:54+00:00"
   },
   "n_windows": 16,
   "scored_tokens_per_window": 1920,
@@ -56,7 +76,7 @@
       "scored_tokens": 30720,
       "kv_bytes_per_token": 12288.0,
       "peak_allocated_mib": 1412.88671875,
-      "seconds": 8.37289794100002,
+      "seconds": 7.400126108999984,
       "delta_ppl": 0.0,
       "compression": 1.0
     },
@@ -71,7 +91,7 @@
       "scored_tokens": 30720,
       "kv_bytes_per_token": 6528.0,
       "peak_allocated_mib": 1322.88671875,
-      "seconds": 15.004994906999968,
+      "seconds": 14.930970797999862,
       "delta_ppl": 0.09835192010946159,
       "compression": 1.8823529411764706
     },
@@ -87,7 +107,7 @@
       "scored_tokens": 30720,
       "kv_bytes_per_token": 4368.0,
       "peak_allocated_mib": 1293.63671875,
-      "seconds": 14.552356628000041,
+      "seconds": 14.426052015000096,
       "delta_ppl": 0.05338066976931799,
       "compression": 2.8131868131868134
     },
@@ -103,9 +123,69 @@
       "scored_tokens": 30720,
       "kv_bytes_per_token": 2928.0,
       "peak_allocated_mib": 1269.63671875,
-      "seconds": 15.771711333999974,
+      "seconds": 15.84404476099985,
       "delta_ppl": 3.524228224554303,
       "compression": 4.19672131147541
+    },
+    "stream1024": {
+      "spec": {
+        "type": "streaming",
+        "budget": 1024,
+        "sink": 4
+      },
+      "ppl": 13.338536039599699,
+      "nll_per_token": 2.5906572923064233,
+      "scored_tokens": 30720,
+      "kv_bytes_per_token": 6144.0,
+      "peak_allocated_mib": 1316.60546875,
+      "seconds": 6.878646918999948,
+      "delta_ppl": 0.2489094261770859,
+      "compression": 2.0
+    },
+    "stream512": {
+      "spec": {
+        "type": "streaming",
+        "budget": 512,
+        "sink": 4
+      },
+      "ppl": 14.541024009983065,
+      "nll_per_token": 2.6769738967219987,
+      "scored_tokens": 30720,
+      "kv_bytes_per_token": 3072.0,
+      "peak_allocated_mib": 1268.88671875,
+      "seconds": 6.974704711999948,
+      "delta_ppl": 1.451397396560452,
+      "compression": 4.0
+    },
+    "h2o1024": {
+      "spec": {
+        "type": "h2o",
+        "budget": 1024,
+        "recent": 512
+      },
+      "ppl": 13.174470186281114,
+      "nll_per_token": 2.578280880053838,
+      "scored_tokens": 30720,
+      "kv_bytes_per_token": 6240.0,
+      "peak_allocated_mib": 1317.01171875,
+      "seconds": 8.94045506800012,
+      "delta_ppl": 0.0848435728585013,
+      "compression": 1.9692307692307693
+    },
+    "h2o512": {
+      "spec": {
+        "type": "h2o",
+        "budget": 512,
+        "recent": 256
+      },
+      "ppl": 13.839839983596715,
+      "nll_per_token": 2.6275513882438344,
+      "scored_tokens": 30720,
+      "kv_bytes_per_token": 3120.0,
+      "peak_allocated_mib": 1269.63671875,
+      "seconds": 9.12178928100002,
+      "delta_ppl": 0.7502133701741016,
+      "compression": 3.9384615384615387
     }
   }
 }
