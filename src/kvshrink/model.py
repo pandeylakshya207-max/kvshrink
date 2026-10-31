@@ -72,25 +72,30 @@ class QwenRunner:
         k = k * cos + rotate_half(k) * sin
         K, V = cache.update(layer, k, v)
         rep = self.n_heads // self.n_kv
-        K = K.repeat_interleave(rep, dim=1)
-        V = V.repeat_interleave(rep, dim=1)
         if T == 1:
-            out = F.scaled_dot_product_attention(q, K, V)
-        elif past == 0:
-            out = F.scaled_dot_product_attention(q, K, V, is_causal=True)
+            # Decode: fold the `rep` query heads sharing a KV head into the query
+            # axis, so K/V are never copied (memory stays proportional to the cache).
+            qg = q.reshape(B, self.n_kv, rep, self.head_dim)
+            out = F.scaled_dot_product_attention(qg, K, V)
+            out = out.reshape(B, self.n_heads, 1, self.head_dim)
         else:
-            q_pos = torch.arange(past, past + T, device=h.device)
-            k_pos = torch.arange(K.shape[2], device=h.device)
-            mask = k_pos[None, :] <= q_pos[:, None]
-            out = F.scaled_dot_product_attention(q, K, V, attn_mask=mask)
+            K = K.repeat_interleave(rep, dim=1)
+            V = V.repeat_interleave(rep, dim=1)
+            if past == 0:
+                out = F.scaled_dot_product_attention(q, K, V, is_causal=True)
+            else:
+                q_pos = torch.arange(past, past + T, device=h.device)
+                k_pos = torch.arange(K.shape[2], device=h.device)
+                mask = k_pos[None, :] <= q_pos[:, None]
+                out = F.scaled_dot_product_attention(q, K, V, attn_mask=mask)
         out = out.transpose(1, 2).reshape(B, T, self.n_heads * self.head_dim)
         return attn.o_proj(out)
 
     @torch.no_grad()
-    def forward(self, input_ids: torch.Tensor, cache: KVCache) -> torch.Tensor:
+    def forward(self, input_ids: torch.Tensor, cache: KVCache, last_only: bool = False) -> torch.Tensor:
         """Run new tokens [B, T] through the model, appending to `cache`.
 
-        Returns logits [B, T, vocab].
+        Returns logits [B, T, vocab], or [B, 1, vocab] if `last_only`.
         """
         past = cache.seq_len(0)
         T = input_ids.shape[1]
@@ -103,6 +108,8 @@ class QwenRunner:
             h = rms_norm(x, layer.post_attention_layernorm.weight, self.eps)
             mlp = layer.mlp
             x = x + mlp.down_proj(F.silu(mlp.gate_proj(h)) * mlp.up_proj(h))
+        if last_only:
+            x = x[:, -1:]
         x = rms_norm(x, self.body.norm.weight, self.eps)
         return self.lm_head(x)
 
@@ -113,11 +120,11 @@ class QwenRunner:
         """Greedy decoding without EOS stopping. Returns [B, T_prompt + max_new_tokens]."""
         if cache is None:
             cache = self.new_cache(input_ids.shape[0], input_ids.shape[1] + max_new_tokens)
-        logits = self.forward(input_ids, cache)
+        logits = self.forward(input_ids, cache, last_only=True)
         nxt = logits[:, -1].argmax(-1, keepdim=True)
         out = [input_ids, nxt]
         for _ in range(max_new_tokens - 1):
-            logits = self.forward(nxt, cache)
+            logits = self.forward(nxt, cache, last_only=True)
             nxt = logits[:, -1].argmax(-1, keepdim=True)
             out.append(nxt)
         return torch.cat(out, dim=1)
