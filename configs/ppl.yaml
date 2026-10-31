@@ -1,0 +1,29 @@
+model: Qwen/Qwen2.5-0.5B-Instruct
+dtype: float16
+dataset:
+  name: Salesforce/wikitext
+  config: wikitext-2-raw-v1
+  split: test
+window: 2048
+prefix: 128
+chunk: 16
+num_windows: 16
+batch_size: 8
+methods:
+  full:
+    type: full
+  int8:
+    type: quant
+    key_bits: 8
+    value_bits: 8
+  kivi4:
+    type: kivi
+    bits: 4
+    group_size: 32
+    residual: 128
+  kivi2:
+    type: kivi
+    bits: 2
+    group_size: 32
+    residual: 128
+output: results/ppl_0.5b
