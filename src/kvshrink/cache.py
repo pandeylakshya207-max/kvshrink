@@ -30,6 +30,10 @@ class KVCache(ABC):
     def seq_len(self, layer: int = 0) -> int:
         """Number of tokens currently stored for `layer`."""
 
+    def tokens_seen(self, layer: int = 0) -> int:
+        """Tokens processed so far = RoPE position of the next token (>= seq_len if evicting)."""
+        return self.seq_len(layer)
+
     @abstractmethod
     def memory_bytes(self) -> int:
         """Bytes allocated for cache storage across all layers."""

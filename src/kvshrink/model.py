@@ -81,10 +81,10 @@ class QwenRunner:
         else:
             K = K.repeat_interleave(rep, dim=1)
             V = V.repeat_interleave(rep, dim=1)
-            if past == 0:
+            if K.shape[2] == T:
                 out = F.scaled_dot_product_attention(q, K, V, is_causal=True)
             else:
-                q_pos = torch.arange(past, past + T, device=h.device)
+                q_pos = torch.arange(K.shape[2] - T, K.shape[2], device=h.device)
                 k_pos = torch.arange(K.shape[2], device=h.device)
                 mask = k_pos[None, :] <= q_pos[:, None]
                 out = F.scaled_dot_product_attention(q, K, V, attn_mask=mask)
@@ -97,7 +97,7 @@ class QwenRunner:
 
         Returns logits [B, T, vocab], or [B, 1, vocab] if `last_only`.
         """
-        past = cache.seq_len(0)
+        past = cache.tokens_seen(0)
         T = input_ids.shape[1]
         positions = torch.arange(past, past + T, device=input_ids.device)
         x = self.body.embed_tokens(input_ids)
