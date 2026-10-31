@@ -77,19 +77,30 @@ class _QuantStream:
         self.zero[dst] = qt.zero
         self.n_quant += n
 
-    def dense(self) -> torch.Tensor:
-        """All stored tokens as a dense [B, H, T, D] tensor (dequantized + window)."""
-        n = self.n_quant
-        if n == 0:
-            return self.window
-        packed, scale, zero = self._slices(n)
-        if self.mode == "token":
-            qt = QuantizedTensor(packed, scale, zero, self.bits, 3, self.group,
-                                 (self.B, self.H, n, self.D), self.dtype)
-        else:
-            qt = QuantizedTensor(packed, scale, zero, self.bits, 2, self.group,
-                                 (self.B, self.H, self.D, n), self.dtype)
-        return torch.cat([dequantize(qt), self.window], dim=2)
+    def dense(self, extra: torch.Tensor | None = None, batch_chunk: int = 16) -> torch.Tensor:
+        """All stored tokens (dequantized + window), plus `extra` new tokens, as [B, H, T, D].
+
+        Dequantization runs `batch_chunk` sequences at a time into one preallocated
+        output in the cache dtype, so temporaries stay small at large batch sizes.
+        """
+        n, w = self.n_quant, self.window.shape[2]
+        t = 0 if extra is None else extra.shape[2]
+        out = torch.empty(self.B, self.H, n + w + t, self.D, dtype=self.dtype, device=self.window.device)
+        if n:
+            packed, scale, zero = self._slices(n)
+            for b0 in range(0, self.B, batch_chunk):
+                b1 = min(b0 + batch_chunk, self.B)
+                if self.mode == "token":
+                    qt = QuantizedTensor(packed[b0:b1], scale[b0:b1], zero[b0:b1], self.bits, 3, self.group,
+                                         (b1 - b0, self.H, n, self.D), self.dtype)
+                else:
+                    qt = QuantizedTensor(packed[b0:b1], scale[b0:b1], zero[b0:b1], self.bits, 2, self.group,
+                                         (b1 - b0, self.H, self.D, n), self.dtype)
+                out[b0:b1, :, :n] = dequantize(qt)
+        out[:, :, n:n + w] = self.window
+        if t:
+            out[:, :, n + w:] = extra.to(self.dtype)
+        return out
 
     def allocated_bytes(self) -> int:
         bufs = (self.packed, self.scale, self.zero, self.window)
@@ -159,10 +170,10 @@ class QuantizedKVCache(KVCache):
             raise ValueError(f"cache overflow: {len(self.k[layer]) + k.shape[2]} > {self.max_len}")
         # This step attends to past tokens as stored (compressed) and to its own new
         # tokens in full precision; the new tokens are compressed for later steps.
-        kd, vd = self.k[layer].dense(), self.v[layer].dense()
+        K, V = self.k[layer].dense(extra=k), self.v[layer].dense(extra=v)
         self.k[layer].append(k)
         self.v[layer].append(v)
-        return torch.cat([kd, k.to(kd.dtype)], dim=2), torch.cat([vd, v.to(vd.dtype)], dim=2)
+        return K, V
 
     def seq_len(self, layer: int = 0) -> int:
         return len(self.k[layer])
