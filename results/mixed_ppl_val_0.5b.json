@@ -1,0 +1,243 @@
+{
+  "model": "Qwen/Qwen2.5-0.5B-Instruct",
+  "config": {
+    "model": "Qwen/Qwen2.5-0.5B-Instruct",
+    "dtype": "float16",
+    "dataset": {
+      "name": "Salesforce/wikitext",
+      "config": "wikitext-2-raw-v1",
+      "split": "validation"
+    },
+    "window": 2048,
+    "prefix": 128,
+    "chunk": 16,
+    "num_windows": 16,
+    "batch_size": 8,
+    "methods": {
+      "full": {
+        "type": "full"
+      },
+      "kivi4": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128
+      },
+      "kivi2": {
+        "type": "kivi",
+        "bits": 2,
+        "group_size": 32,
+        "residual": 128
+      },
+      "k4v2": {
+        "type": "quant",
+        "key_bits": 4,
+        "value_bits": 2,
+        "key_mode": "channel",
+        "value_mode": "token",
+        "key_group": 32,
+        "value_group": 32,
+        "residual": 128
+      },
+      "mixed12": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128,
+        "layer_overrides": {
+          "0": {
+            "key_bits": 2,
+            "value_bits": 2
+          },
+          "1": {
+            "key_bits": 2,
+            "value_bits": 2
+          },
+          "2": {
+            "key_bits": 2,
+            "value_bits": 2
+          },
+          "5": {
+            "key_bits": 2,
+            "value_bits": 2
+          },
+          "6": {
+            "key_bits": 2,
+            "value_bits": 2
+          },
+          "12": {
+            "key_bits": 2,
+            "value_bits": 2
+          },
+          "13": {
+            "key_bits": 2,
+            "value_bits": 2
+          },
+          "14": {
+            "key_bits": 2,
+            "value_bits": 2
+          },
+          "17": {
+            "key_bits": 2,
+            "value_bits": 2
+          },
+          "18": {
+            "key_bits": 2,
+            "value_bits": 2
+          },
+          "19": {
+            "key_bits": 2,
+            "value_bits": 2
+          },
+          "23": {
+            "key_bits": 2,
+            "value_bits": 2
+          }
+        }
+      }
+    },
+    "output": "results/mixed_ppl_val_0.5b"
+  },
+  "env": {
+    "gpu": "Tesla T4",
+    "torch": "2.11.0+cu130",
+    "transformers": "5.22.1",
+    "python": "3.13.16",
+    "timestamp": "2026-10-31T20:16:37+00:00"
+  },
+  "n_windows": 16,
+  "scored_tokens_per_window": 1920,
+  "methods": {
+    "full": {
+      "spec": {
+        "type": "full"
+      },
+      "ppl": 12.078056710396178,
+      "nll_per_token": 2.4913903112212816,
+      "scored_tokens": 30720,
+      "kv_bytes_per_token": 12288.0,
+      "peak_allocated_mib": 1412.88671875,
+      "seconds": 7.375592253000832,
+      "delta_ppl": 0.0,
+      "compression": 1.0
+    },
+    "kivi4": {
+      "spec": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128
+      },
+      "ppl": 12.108997220244195,
+      "nll_per_token": 2.493948748211066,
+      "scored_tokens": 30720,
+      "kv_bytes_per_token": 4368.0,
+      "peak_allocated_mib": 1293.63671875,
+      "seconds": 14.597210849000476,
+      "delta_ppl": 0.030940509848017328,
+      "compression": 2.8131868131868134
+    },
+    "kivi2": {
+      "spec": {
+        "type": "kivi",
+        "bits": 2,
+        "group_size": 32,
+        "residual": 128
+      },
+      "ppl": 14.454989152113322,
+      "nll_per_token": 2.671039625008901,
+      "scored_tokens": 30720,
+      "kv_bytes_per_token": 2928.0,
+      "peak_allocated_mib": 1269.63671875,
+      "seconds": 15.969378292000329,
+      "delta_ppl": 2.3769324417171447,
+      "compression": 4.19672131147541
+    },
+    "k4v2": {
+      "spec": {
+        "type": "quant",
+        "key_bits": 4,
+        "value_bits": 2,
+        "key_mode": "channel",
+        "value_mode": "token",
+        "key_group": 32,
+        "value_group": 32,
+        "residual": 128
+      },
+      "ppl": 12.409005420454177,
+      "nll_per_token": 2.5184224526087444,
+      "scored_tokens": 30720,
+      "kv_bytes_per_token": 3648.0,
+      "peak_allocated_mib": 1281.63671875,
+      "seconds": 15.342602370999884,
+      "delta_ppl": 0.3309487100579993,
+      "compression": 3.3684210526315788
+    },
+    "mixed12": {
+      "spec": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128,
+        "layer_overrides": {
+          "0": {
+            "key_bits": 2,
+            "value_bits": 2
+          },
+          "1": {
+            "key_bits": 2,
+            "value_bits": 2
+          },
+          "2": {
+            "key_bits": 2,
+            "value_bits": 2
+          },
+          "5": {
+            "key_bits": 2,
+            "value_bits": 2
+          },
+          "6": {
+            "key_bits": 2,
+            "value_bits": 2
+          },
+          "12": {
+            "key_bits": 2,
+            "value_bits": 2
+          },
+          "13": {
+            "key_bits": 2,
+            "value_bits": 2
+          },
+          "14": {
+            "key_bits": 2,
+            "value_bits": 2
+          },
+          "17": {
+            "key_bits": 2,
+            "value_bits": 2
+          },
+          "18": {
+            "key_bits": 2,
+            "value_bits": 2
+          },
+          "19": {
+            "key_bits": 2,
+            "value_bits": 2
+          },
+          "23": {
+            "key_bits": 2,
+            "value_bits": 2
+          }
+        }
+      },
+      "ppl": 12.391044472093897,
+      "nll_per_token": 2.5169739916920664,
+      "scored_tokens": 30720,
+      "kv_bytes_per_token": 3648.0,
+      "peak_allocated_mib": 1281.63671875,
+      "seconds": 15.798063299000205,
+      "delta_ppl": 0.3129877616977197,
+      "compression": 3.3684210526315788
+    }
+  }
+}
