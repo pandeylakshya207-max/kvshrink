@@ -63,7 +63,30 @@ class QwenRunner:
         emb = torch.cat((freqs, freqs), dim=-1)
         return emb.cos().to(dtype), emb.sin().to(dtype)
 
-    def _attention(self, attn, h, cos, sin, cache: KVCache, layer: int, past: int) -> torch.Tensor:
+    def _attention_with_probs(
+        self, q: torch.Tensor, K: torch.Tensor, V: torch.Tensor, T: int
+    ) -> tuple[torch.Tensor, torch.Tensor]:
+        """Explicit GQA attention that also returns attention mass per KV head.
+
+        The last T keys are the new tokens (causal among themselves); all earlier
+        keys are stored past and fully visible. Returns (out [B, H_q, T, D],
+        attn [B, H_kv, S]) where attn sums the probabilities over the query heads
+        sharing each KV head and over the T queries.
+        """
+        B, S = q.shape[0], K.shape[2]
+        rep = self.n_heads // self.n_kv
+        qg = q.reshape(B, self.n_kv, rep * T, self.head_dim)
+        scores = (qg.float() @ K.float().transpose(-1, -2)) * self.head_dim ** -0.5
+        scores = scores.view(B, self.n_kv, rep, T, S)
+        q_idx = torch.arange(S - T, S, device=q.device)
+        k_idx = torch.arange(S, device=q.device)
+        scores = scores.masked_fill(k_idx[None, :] > q_idx[:, None], float("-inf"))
+        probs = scores.softmax(dim=-1)
+        out = probs.view(B, self.n_kv, rep * T, S).to(V.dtype) @ V
+        out = out.view(B, self.n_kv, rep, T, self.head_dim).reshape(B, self.n_heads, T, self.head_dim)
+        return out, probs.sum(dim=(2, 3))
+
+    def _attention(self, attn, h, cos, sin, cache: KVCache, layer: int) -> torch.Tensor:
         B, T, _ = h.shape
         q = attn.q_proj(h).view(B, T, self.n_heads, self.head_dim).transpose(1, 2)
         k = attn.k_proj(h).view(B, T, self.n_kv, self.head_dim).transpose(1, 2)
@@ -72,7 +95,10 @@ class QwenRunner:
         k = k * cos + rotate_half(k) * sin
         K, V = cache.update(layer, k, v)
         rep = self.n_heads // self.n_kv
-        if T == 1:
+        if getattr(cache, "needs_attention", False):
+            out, mass = self._attention_with_probs(q, K, V, T)
+            cache.observe(layer, mass)
+        elif T == 1:
             # Decode: fold the `rep` query heads sharing a KV head into the query
             # axis, so K/V are never copied (memory stays proportional to the cache).
             qg = q.reshape(B, self.n_kv, rep, self.head_dim)
@@ -84,6 +110,8 @@ class QwenRunner:
             if K.shape[2] == T:
                 out = F.scaled_dot_product_attention(q, K, V, is_causal=True)
             else:
+                # Stored past (possibly evicted, so fewer than the positions seen) is
+                # fully visible; the T new tokens are causal among themselves.
                 q_pos = torch.arange(K.shape[2] - T, K.shape[2], device=h.device)
                 k_pos = torch.arange(K.shape[2], device=h.device)
                 mask = k_pos[None, :] <= q_pos[:, None]
@@ -95,7 +123,9 @@ class QwenRunner:
     def forward(self, input_ids: torch.Tensor, cache: KVCache, last_only: bool = False) -> torch.Tensor:
         """Run new tokens [B, T] through the model, appending to `cache`.
 
-        Returns logits [B, T, vocab], or [B, 1, vocab] if `last_only`.
+        RoPE positions continue from `cache.tokens_seen()`, which can exceed the
+        stored length when the cache evicts. Returns logits [B, T, vocab], or
+        [B, 1, vocab] if `last_only`.
         """
         past = cache.tokens_seen(0)
         T = input_ids.shape[1]
@@ -104,7 +134,7 @@ class QwenRunner:
         cos, sin = self._rope(positions, x.dtype)
         for i, layer in enumerate(self.body.layers):
             h = rms_norm(x, layer.input_layernorm.weight, self.eps)
-            x = x + self._attention(layer.self_attn, h, cos, sin, cache, i, past)
+            x = x + self._attention(layer.self_attn, h, cos, sin, cache, i)
             h = rms_norm(x, layer.post_attention_layernorm.weight, self.eps)
             mlp = layer.mlp
             x = x + mlp.down_proj(F.silu(mlp.gate_proj(h)) * mlp.up_proj(h))

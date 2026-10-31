@@ -4,7 +4,7 @@ from __future__ import annotations
 import torch
 
 from kvshrink.cache import KVCache, StaticKVCache
-from kvshrink.evict_cache import StreamingLLMCache
+from kvshrink.evict_cache import H2OCache, StreamingLLMCache
 from kvshrink.quant_cache import QuantizedKVCache
 
 
@@ -19,6 +19,7 @@ def make_cache(
       quant - QuantizedKVCache with explicit key/value bits, modes, groups, residual
       kivi  - per-channel keys, per-token values: bits, group_size, residual
       streaming - StreamingLLM sinks + recent window: budget, sink
+      h2o   - heavy hitters + recent window: budget, recent
     """
     kw = {k: v for k, v in spec.items() if k != "type"}
     kind = spec["type"]
@@ -35,4 +36,6 @@ def make_cache(
         )
     if kind == "streaming":
         return StreamingLLMCache.from_config(config, batch_size, kw["budget"], kw.get("sink", 4), dtype, device)
+    if kind == "h2o":
+        return H2OCache.from_config(config, batch_size, kw["budget"], kw["recent"], dtype, device)
     raise ValueError(f"unknown cache type: {kind}")

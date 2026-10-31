@@ -26,4 +26,20 @@ methods:
     bits: 2
     group_size: 32
     residual: 128
+  stream1024:
+    type: streaming
+    budget: 1024
+    sink: 4
+  stream512:
+    type: streaming
+    budget: 512
+    sink: 4
+  h2o1024:
+    type: h2o
+    budget: 1024
+    recent: 512
+  h2o512:
+    type: h2o
+    budget: 512
+    recent: 256
 output: results/ppl_0.5b
