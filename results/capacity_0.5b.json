@@ -1,0 +1,330 @@
+{
+  "model": "Qwen/Qwen2.5-0.5B-Instruct",
+  "config": {
+    "model": "Qwen/Qwen2.5-0.5B-Instruct",
+    "dtype": "float16",
+    "contexts": [
+      4096,
+      8192
+    ],
+    "decode_steps": 3,
+    "max_batch": 4096,
+    "reserve_gib": 0.5,
+    "methods": {
+      "full": {
+        "type": "full"
+      },
+      "int8": {
+        "type": "quant",
+        "key_bits": 8,
+        "value_bits": 8
+      },
+      "kivi4": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128
+      },
+      "k4v2": {
+        "type": "quant",
+        "key_bits": 4,
+        "value_bits": 2,
+        "key_mode": "channel",
+        "value_mode": "token",
+        "key_group": 32,
+        "value_group": 32,
+        "residual": 128
+      },
+      "kivi2": {
+        "type": "kivi",
+        "bits": 2,
+        "group_size": 32,
+        "residual": 128
+      },
+      "stream50": {
+        "type": "streaming",
+        "budget_frac": 0.5,
+        "sink": 4
+      },
+      "stream25": {
+        "type": "streaming",
+        "budget_frac": 0.25,
+        "sink": 4
+      },
+      "h2o50": {
+        "type": "h2o",
+        "budget_frac": 0.5,
+        "recent_frac": 0.5
+      },
+      "h2o25": {
+        "type": "h2o",
+        "budget_frac": 0.25,
+        "recent_frac": 0.5
+      }
+    },
+    "output": "results/capacity_0.5b"
+  },
+  "weights_gib": 0.9278979301452637,
+  "rows": [
+    {
+      "max_batch": 284,
+      "hit_search_limit": false,
+      "at_max": {
+        "batch": 284,
+        "decode_tok_s": 3453.393342092883,
+        "peak_allocated_gib": 14.330633640289307,
+        "kv_used_gib": 13.3125,
+        "kv_bytes_per_seq": 50331648.0
+      },
+      "method": "full",
+      "context": 4096,
+      "ideal_max_batch": 280
+    },
+    {
+      "max_batch": 142,
+      "hit_search_limit": false,
+      "at_max": {
+        "batch": 142,
+        "decode_tok_s": 1766.8808567807082,
+        "peak_allocated_gib": 14.290801525115967,
+        "kv_used_gib": 13.3125,
+        "kv_bytes_per_seq": 100663296.0
+      },
+      "method": "full",
+      "context": 8192,
+      "ideal_max_batch": 140
+    },
+    {
+      "max_batch": 488,
+      "hit_search_limit": false,
+      "at_max": {
+        "batch": 488,
+        "decode_tok_s": 219.97319182372632,
+        "peak_allocated_gib": 14.13919734954834,
+        "kv_used_gib": 12.15234375,
+        "kv_bytes_per_seq": 26738688.0
+      },
+      "method": "int8",
+      "context": 4096,
+      "ideal_max_batch": 527
+    },
+    {
+      "max_batch": 242,
+      "hit_search_limit": false,
+      "at_max": {
+        "batch": 242,
+        "decode_tok_s": 110.7818361205972,
+        "peak_allocated_gib": 14.12466287612915,
+        "kv_used_gib": 12.052734375,
+        "kv_bytes_per_seq": 53477376.0
+      },
+      "method": "int8",
+      "context": 8192,
+      "ideal_max_batch": 263
+    },
+    {
+      "max_batch": 712,
+      "hit_search_limit": false,
+      "at_max": {
+        "batch": 712,
+        "decode_tok_s": 197.16909894794318,
+        "peak_allocated_gib": 14.032026767730713,
+        "kv_used_gib": 11.146728515625,
+        "kv_bytes_per_seq": 16809984.0
+      },
+      "method": "kivi4",
+      "context": 4096,
+      "ideal_max_batch": 839
+    },
+    {
+      "max_batch": 376,
+      "hit_search_limit": false,
+      "at_max": {
+        "batch": 376,
+        "decode_tok_s": 99.79868490380427,
+        "peak_allocated_gib": 14.279199600219727,
+        "kv_used_gib": 11.394287109375,
+        "kv_bytes_per_seq": 32538624.0
+      },
+      "method": "kivi4",
+      "context": 8192,
+      "ideal_max_batch": 433
+    },
+    {
+      "max_batch": 848,
+      "hit_search_limit": false,
+      "at_max": {
+        "batch": 848,
+        "decode_tok_s": 192.64178195068126,
+        "peak_allocated_gib": 14.019718170166016,
+        "kv_used_gib": 10.869140625,
+        "kv_bytes_per_seq": 13762560.0
+      },
+      "method": "k4v2",
+      "context": 4096,
+      "ideal_max_batch": 1024
+    },
+    {
+      "max_batch": 448,
+      "hit_search_limit": false,
+      "at_max": {
+        "batch": 448,
+        "decode_tok_s": 95.85518752431628,
+        "peak_allocated_gib": 14.12574815750122,
+        "kv_used_gib": 10.9921875,
+        "kv_bytes_per_seq": 26345472.0
+      },
+      "method": "k4v2",
+      "context": 8192,
+      "ideal_max_batch": 535
+    },
+    {
+      "max_batch": 1056,
+      "hit_search_limit": false,
+      "at_max": {
+        "batch": 1056,
+        "decode_tok_s": 187.40426965567752,
+        "peak_allocated_gib": 14.225675106048584,
+        "kv_used_gib": 10.5380859375,
+        "kv_bytes_per_seq": 10715136.0
+      },
+      "method": "kivi2",
+      "context": 4096,
+      "ideal_max_batch": 1316
+    },
+    {
+      "max_batch": 561,
+      "hit_search_limit": false,
+      "at_max": {
+        "batch": 561,
+        "decode_tok_s": 92.47375802133355,
+        "peak_allocated_gib": 14.20444107055664,
+        "kv_used_gib": 10.529022216796875,
+        "kv_bytes_per_seq": 20152320.0
+      },
+      "method": "kivi2",
+      "context": 8192,
+      "ideal_max_batch": 699
+    },
+    {
+      "max_batch": 528,
+      "hit_search_limit": false,
+      "at_max": {
+        "batch": 528,
+        "decode_tok_s": 1214.3984249288008,
+        "peak_allocated_gib": 14.346211910247803,
+        "kv_used_gib": 12.375,
+        "kv_bytes_per_seq": 25165824.0
+      },
+      "method": "stream50",
+      "context": 4096,
+      "ideal_max_batch": 560
+    },
+    {
+      "max_batch": 264,
+      "hit_search_limit": false,
+      "at_max": {
+        "batch": 264,
+        "decode_tok_s": 625.5049338287769,
+        "peak_allocated_gib": 14.3446364402771,
+        "kv_used_gib": 12.375,
+        "kv_bytes_per_seq": 50331648.0
+      },
+      "method": "stream50",
+      "context": 8192,
+      "ideal_max_batch": 280
+    },
+    {
+      "max_batch": 1048,
+      "hit_search_limit": false,
+      "at_max": {
+        "batch": 1048,
+        "decode_tok_s": 2239.908224776506,
+        "peak_allocated_gib": 14.247752666473389,
+        "kv_used_gib": 12.28125,
+        "kv_bytes_per_seq": 12582912.0
+      },
+      "method": "stream25",
+      "context": 4096,
+      "ideal_max_batch": 1120
+    },
+    {
+      "max_batch": 528,
+      "hit_search_limit": false,
+      "at_max": {
+        "batch": 528,
+        "decode_tok_s": 1189.2719126641637,
+        "peak_allocated_gib": 14.346211910247803,
+        "kv_used_gib": 12.375,
+        "kv_bytes_per_seq": 25165824.0
+      },
+      "method": "stream25",
+      "context": 8192,
+      "ideal_max_batch": 560
+    },
+    {
+      "max_batch": 511,
+      "hit_search_limit": false,
+      "at_max": {
+        "batch": 511,
+        "decode_tok_s": 666.2262942742756,
+        "peak_allocated_gib": 13.683072090148926,
+        "kv_used_gib": 12.1636962890625,
+        "kv_bytes_per_seq": 25559040.0
+      },
+      "method": "h2o50",
+      "context": 4096,
+      "ideal_max_batch": 551
+    },
+    {
+      "max_batch": 255,
+      "hit_search_limit": false,
+      "at_max": {
+        "batch": 255,
+        "decode_tok_s": 337.2333309467713,
+        "peak_allocated_gib": 13.67848825454712,
+        "kv_used_gib": 12.139892578125,
+        "kv_bytes_per_seq": 51118080.0
+      },
+      "method": "h2o50",
+      "context": 8192,
+      "ideal_max_batch": 275
+    },
+    {
+      "max_batch": 1019,
+      "hit_search_limit": false,
+      "at_max": {
+        "batch": 1019,
+        "decode_tok_s": 1229.9213829331193,
+        "peak_allocated_gib": 13.638137340545654,
+        "kv_used_gib": 12.12799072265625,
+        "kv_bytes_per_seq": 12779520.0
+      },
+      "method": "h2o25",
+      "context": 4096,
+      "ideal_max_batch": 1103
+    },
+    {
+      "max_batch": 511,
+      "hit_search_limit": false,
+      "at_max": {
+        "batch": 511,
+        "decode_tok_s": 663.9808361160381,
+        "peak_allocated_gib": 13.683072090148926,
+        "kv_used_gib": 12.1636962890625,
+        "kv_bytes_per_seq": 25559040.0
+      },
+      "method": "h2o25",
+      "context": 8192,
+      "ideal_max_batch": 551
+    }
+  ],
+  "env": {
+    "gpu": "Tesla T4",
+    "total_gib": 14.56317138671875,
+    "torch": "2.11.0+cu130",
+    "transformers": "5.22.1",
+    "python": "3.13.16",
+    "timestamp": "2026-10-31T20:30:18+00:00"
+  }
+}
