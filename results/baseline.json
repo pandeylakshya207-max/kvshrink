@@ -1,0 +1,146 @@
+{
+  "model": "Qwen/Qwen2.5-0.5B-Instruct",
+  "config": {
+    "model": "Qwen/Qwen2.5-0.5B-Instruct",
+    "dtype": "float16",
+    "seed": 0,
+    "kv_probe_tokens": 8192,
+    "latency": {
+      "context_lengths": [
+        512,
+        2048,
+        4096,
+        8192
+      ],
+      "decode_tokens": 128,
+      "warmup": 1,
+      "repeats": 3
+    },
+    "capacity": {
+      "context_lengths": [
+        4096,
+        8192
+      ],
+      "decode_steps": 8,
+      "max_batch": 2048
+    },
+    "output": "results/baseline"
+  },
+  "env": {
+    "gpu": "Tesla T4",
+    "torch": "2.11.0+cu130",
+    "cuda": "13.0",
+    "transformers": "5.22.1",
+    "python": "3.13.16",
+    "timestamp": "2026-10-31T14:18:04+00:00"
+  },
+  "nvidia_smi_before_load_mib": 3,
+  "weights_allocated_mib": 950.16748046875,
+  "kv_bytes_per_token": {
+    "n_tokens": 8192,
+    "measured_bytes_per_token": 12288.0,
+    "analytic_bytes_per_token": 12288.0
+  },
+  "latency": [
+    {
+      "context": 512,
+      "decode_tokens": 128,
+      "prefill_tok_s": {
+        "mean": 17748.070185813576,
+        "std": 1641.018113479546
+      },
+      "decode_tok_s": {
+        "mean": 43.190575405686694,
+        "std": 0.6865418551135184
+      },
+      "decode_ms_per_token": {
+        "mean": 23.157086690266926,
+        "std": 0.36684934116057644
+      },
+      "peak_allocated_mib": 982.92529296875,
+      "reserved_mib": 1048.0,
+      "nvidia_smi_used_mib": 1181
+    },
+    {
+      "context": 2048,
+      "decode_tokens": 128,
+      "prefill_tok_s": {
+        "mean": 19980.72510252777,
+        "std": 310.2741476060121
+      },
+      "decode_tok_s": {
+        "mean": 43.29916128856285,
+        "std": 0.6993775581427538
+      },
+      "decode_ms_per_token": {
+        "mean": 23.0991694132487,
+        "std": 0.37462220001049384
+      },
+      "peak_allocated_mib": 1052.32373046875,
+      "reserved_mib": 1128.0,
+      "nvidia_smi_used_mib": 1261
+    },
+    {
+      "context": 4096,
+      "decode_tokens": 128,
+      "prefill_tok_s": {
+        "mean": 17660.085318708956,
+        "std": 165.03688004548565
+      },
+      "decode_tok_s": {
+        "mean": 42.89300709461062,
+        "std": 0.5352126108108819
+      },
+      "decode_ms_per_token": {
+        "mean": 23.316240946451824,
+        "std": 0.29060682062120513
+      },
+      "peak_allocated_mib": 1141.76123046875,
+      "reserved_mib": 1202.0,
+      "nvidia_smi_used_mib": 1335
+    },
+    {
+      "context": 8192,
+      "decode_tokens": 128,
+      "prefill_tok_s": {
+        "mean": 14142.750431704633,
+        "std": 264.1671549417918
+      },
+      "decode_tok_s": {
+        "mean": 43.48154105219525,
+        "std": 0.6784599224238859
+      },
+      "decode_ms_per_token": {
+        "mean": 23.00198491414388,
+        "std": 0.35762649605720753
+      },
+      "peak_allocated_mib": 1314.91748046875,
+      "reserved_mib": 1450.0,
+      "nvidia_smi_used_mib": 1583
+    }
+  ],
+  "capacity": [
+    {
+      "context": 4096,
+      "max_batch": 284,
+      "hit_search_limit": false,
+      "at_max_batch": {
+        "batch": 284,
+        "decode_tok_s": 3107.100131061174,
+        "peak_allocated_mib": 14674.56884765625,
+        "kv_cache_mib": 13632.0
+      }
+    },
+    {
+      "context": 8192,
+      "max_batch": 142,
+      "hit_search_limit": false,
+      "at_max_batch": {
+        "batch": 142,
+        "decode_tok_s": 1598.1957303255892,
+        "peak_allocated_mib": 14633.78076171875,
+        "kv_cache_mib": 13632.0
+      }
+    }
+  ]
+}
