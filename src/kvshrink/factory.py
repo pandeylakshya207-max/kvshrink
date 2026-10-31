@@ -33,6 +33,7 @@ def make_cache(
             config, batch_size, max_len, dtype, device,
             key_bits=kw["bits"], value_bits=kw["bits"], key_mode="channel", value_mode="token",
             key_group=g, value_group=g, residual=kw.get("residual", 128),
+            layer_overrides=kw.get("layer_overrides"),
         )
     if kind == "streaming":
         return StreamingLLMCache.from_config(config, batch_size, kw["budget"], kw.get("sink", 4), dtype, device)

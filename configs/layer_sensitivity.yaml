@@ -1,0 +1,241 @@
+model: Qwen/Qwen2.5-0.5B-Instruct
+dtype: float16
+dataset:
+  name: Salesforce/wikitext
+  config: wikitext-2-raw-v1
+  split: test
+window: 2048
+prefix: 128
+chunk: 16
+num_windows: 16
+batch_size: 8
+methods:
+  full:
+    type: full
+  kivi4:
+    type: kivi
+    bits: 4
+    group_size: 32
+    residual: 128
+  kivi2:
+    type: kivi
+    bits: 2
+    group_size: 32
+    residual: 128
+  l00_2bit:
+    type: kivi
+    bits: 4
+    group_size: 32
+    residual: 128
+    layer_overrides:
+      0:
+        key_bits: 2
+        value_bits: 2
+  l01_2bit:
+    type: kivi
+    bits: 4
+    group_size: 32
+    residual: 128
+    layer_overrides:
+      1:
+        key_bits: 2
+        value_bits: 2
+  l02_2bit:
+    type: kivi
+    bits: 4
+    group_size: 32
+    residual: 128
+    layer_overrides:
+      2:
+        key_bits: 2
+        value_bits: 2
+  l03_2bit:
+    type: kivi
+    bits: 4
+    group_size: 32
+    residual: 128
+    layer_overrides:
+      3:
+        key_bits: 2
+        value_bits: 2
+  l04_2bit:
+    type: kivi
+    bits: 4
+    group_size: 32
+    residual: 128
+    layer_overrides:
+      4:
+        key_bits: 2
+        value_bits: 2
+  l05_2bit:
+    type: kivi
+    bits: 4
+    group_size: 32
+    residual: 128
+    layer_overrides:
+      5:
+        key_bits: 2
+        value_bits: 2
+  l06_2bit:
+    type: kivi
+    bits: 4
+    group_size: 32
+    residual: 128
+    layer_overrides:
+      6:
+        key_bits: 2
+        value_bits: 2
+  l07_2bit:
+    type: kivi
+    bits: 4
+    group_size: 32
+    residual: 128
+    layer_overrides:
+      7:
+        key_bits: 2
+        value_bits: 2
+  l08_2bit:
+    type: kivi
+    bits: 4
+    group_size: 32
+    residual: 128
+    layer_overrides:
+      8:
+        key_bits: 2
+        value_bits: 2
+  l09_2bit:
+    type: kivi
+    bits: 4
+    group_size: 32
+    residual: 128
+    layer_overrides:
+      9:
+        key_bits: 2
+        value_bits: 2
+  l10_2bit:
+    type: kivi
+    bits: 4
+    group_size: 32
+    residual: 128
+    layer_overrides:
+      10:
+        key_bits: 2
+        value_bits: 2
+  l11_2bit:
+    type: kivi
+    bits: 4
+    group_size: 32
+    residual: 128
+    layer_overrides:
+      11:
+        key_bits: 2
+        value_bits: 2
+  l12_2bit:
+    type: kivi
+    bits: 4
+    group_size: 32
+    residual: 128
+    layer_overrides:
+      12:
+        key_bits: 2
+        value_bits: 2
+  l13_2bit:
+    type: kivi
+    bits: 4
+    group_size: 32
+    residual: 128
+    layer_overrides:
+      13:
+        key_bits: 2
+        value_bits: 2
+  l14_2bit:
+    type: kivi
+    bits: 4
+    group_size: 32
+    residual: 128
+    layer_overrides:
+      14:
+        key_bits: 2
+        value_bits: 2
+  l15_2bit:
+    type: kivi
+    bits: 4
+    group_size: 32
+    residual: 128
+    layer_overrides:
+      15:
+        key_bits: 2
+        value_bits: 2
+  l16_2bit:
+    type: kivi
+    bits: 4
+    group_size: 32
+    residual: 128
+    layer_overrides:
+      16:
+        key_bits: 2
+        value_bits: 2
+  l17_2bit:
+    type: kivi
+    bits: 4
+    group_size: 32
+    residual: 128
+    layer_overrides:
+      17:
+        key_bits: 2
+        value_bits: 2
+  l18_2bit:
+    type: kivi
+    bits: 4
+    group_size: 32
+    residual: 128
+    layer_overrides:
+      18:
+        key_bits: 2
+        value_bits: 2
+  l19_2bit:
+    type: kivi
+    bits: 4
+    group_size: 32
+    residual: 128
+    layer_overrides:
+      19:
+        key_bits: 2
+        value_bits: 2
+  l20_2bit:
+    type: kivi
+    bits: 4
+    group_size: 32
+    residual: 128
+    layer_overrides:
+      20:
+        key_bits: 2
+        value_bits: 2
+  l21_2bit:
+    type: kivi
+    bits: 4
+    group_size: 32
+    residual: 128
+    layer_overrides:
+      21:
+        key_bits: 2
+        value_bits: 2
+  l22_2bit:
+    type: kivi
+    bits: 4
+    group_size: 32
+    residual: 128
+    layer_overrides:
+      22:
+        key_bits: 2
+        value_bits: 2
+  l23_2bit:
+    type: kivi
+    bits: 4
+    group_size: 32
+    residual: 128
+    layer_overrides:
+      23:
+        key_bits: 2
+        value_bits: 2
+output: results/layer_sensitivity_0.5b

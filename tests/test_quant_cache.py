@@ -130,3 +130,34 @@ def test_int8_cache_decode_logits_close():
         got = runner.forward(ids[:, t:t + 1], q_cache)
         rel = (got - ref).norm() / ref.norm()
         assert rel < 0.05, (t, rel.item())
+
+
+def test_layer_overrides_per_layer_bits():
+    cache = QuantizedKVCache(L, B, H, D, MAXLEN, key_bits=4, value_bits=4, key_mode="channel",
+                             value_mode="token", key_group=8, value_group=8, residual=0,
+                             layer_overrides={1: {"key_bits": 2, "value_bits": 2}})
+    assert (cache.k[0].bits, cache.v[0].bits) == (4, 4)
+    assert (cache.k[1].bits, cache.v[1].bits) == (2, 2)
+    for layer in range(L):
+        cache.update(layer, torch.randn(B, H, 16, D), torch.randn(B, H, 16, D))
+    full4 = QuantizedKVCache(L, B, H, D, MAXLEN, key_bits=4, value_bits=4, key_mode="channel",
+                             value_mode="token", key_group=8, value_group=8, residual=0)
+    for layer in range(L):
+        full4.update(layer, torch.randn(B, H, 16, D), torch.randn(B, H, 16, D))
+    assert cache.used_bytes() < full4.used_bytes()
+
+
+def test_layer_overrides_validation():
+    with pytest.raises(ValueError):
+        QuantizedKVCache(L, B, H, D, MAXLEN, key_bits=4, value_bits=4, layer_overrides={L: {"key_bits": 2}})
+    with pytest.raises(ValueError):
+        QuantizedKVCache(L, B, H, D, MAXLEN, key_bits=4, value_bits=4, layer_overrides={0: {"bitz": 2}})
+
+
+def test_factory_kivi_layer_overrides():
+    from kvshrink.factory import make_cache
+    model = tiny_model()
+    spec = {"type": "kivi", "bits": 4, "group_size": 4, "residual": 8,
+            "layer_overrides": {0: {"key_bits": 2, "value_bits": 2}}}
+    c = make_cache(spec, model.config, 1, 32, torch.float32)
+    assert (c.k[0].bits, c.k[1].bits) == (2, 4)

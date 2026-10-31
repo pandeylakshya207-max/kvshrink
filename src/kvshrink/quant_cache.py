@@ -120,14 +120,27 @@ class QuantizedKVCache(KVCache):
         residual: int = 0,
         dtype: torch.dtype = torch.float16,
         device: torch.device | str = "cpu",
+        layer_overrides: dict[int, dict] | None = None,
     ) -> None:
-        key_group = key_group or head_dim
-        value_group = value_group or head_dim
+        """`layer_overrides` maps a layer index to per-layer replacements for any of
+        key_bits, value_bits, key_mode, value_mode, key_group, value_group, residual."""
+        base = {"key_bits": key_bits, "value_bits": value_bits, "key_mode": key_mode,
+                "value_mode": value_mode, "key_group": key_group or head_dim,
+                "value_group": value_group or head_dim, "residual": residual}
+        overrides = {int(i): dict(o) for i, o in (layer_overrides or {}).items()}
+        for i, o in overrides.items():
+            if not 0 <= i < num_layers:
+                raise ValueError(f"layer_overrides: layer {i} out of range [0, {num_layers})")
+            if set(o) - set(base):
+                raise ValueError(f"layer_overrides: unknown keys {sorted(set(o) - set(base))}")
         args = (batch_size, num_kv_heads, head_dim, max_len)
-        self.k = [_QuantStream(*args, key_bits, key_mode, key_group, residual, dtype, device)
-                  for _ in range(num_layers)]
-        self.v = [_QuantStream(*args, value_bits, value_mode, value_group, residual, dtype, device)
-                  for _ in range(num_layers)]
+        self.k, self.v = [], []
+        for i in range(num_layers):
+            c = {**base, **overrides.get(i, {})}
+            self.k.append(_QuantStream(*args, c["key_bits"], c["key_mode"], c["key_group"],
+                                       c["residual"], dtype, device))
+            self.v.append(_QuantStream(*args, c["value_bits"], c["value_mode"], c["value_group"],
+                                       c["residual"], dtype, device))
         self.num_layers = num_layers
         self.max_len = max_len
 
