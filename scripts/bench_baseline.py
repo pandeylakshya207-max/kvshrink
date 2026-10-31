@@ -293,9 +293,9 @@ def main() -> None:
         print(f"capacity ctx={ctx}: max batch {row['max_batch']}", flush=True)
 
     out.parent.mkdir(parents=True, exist_ok=True)
-    out.parent / (out.name + ".json").write_text(json.dumps(results, indent=2))
+    (out.parent / (out.name + ".json")).write_text(json.dumps(results, indent=2))
     md = render_markdown(results)
-    out.parent / (out.name + ".md").write_text(md)
+    (out.parent / (out.name + ".md")).write_text(md)
     print(md)
 
 
