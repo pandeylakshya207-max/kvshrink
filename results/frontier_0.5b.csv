@@ -1,0 +1,25 @@
+panel,method,family,label,kv_memory_pct_of_fp16,value
+WikiText-2 perplexity (lower is better),full,fp16,fp16,100.0,13.090
+WikiText-2 perplexity (lower is better),int8,quant,int8,53.1,13.188
+WikiText-2 perplexity (lower is better),kivi4,quant,KIVI-4,35.5,13.143
+WikiText-2 perplexity (lower is better),kivi2,quant,KIVI-2,23.8,16.614
+WikiText-2 perplexity (lower is better),stream1024,streaming,50%,50.0,13.339
+WikiText-2 perplexity (lower is better),stream512,streaming,25%,25.0,14.541
+WikiText-2 perplexity (lower is better),h2o1024,h2o,50%,50.8,13.174
+WikiText-2 perplexity (lower is better),h2o512,h2o,25%,25.4,13.840
+"Needle retrieval, 4k-16k (higher is better)",full,fp16,fp16,100.0,100.000
+"Needle retrieval, 4k-16k (higher is better)",int8,quant,int8,53.1,100.000
+"Needle retrieval, 4k-16k (higher is better)",kivi4,quant,KIVI-4,32.5,100.000
+"Needle retrieval, 4k-16k (higher is better)",kivi2,quant,KIVI-2,20.3,53.333
+"Needle retrieval, 4k-16k (higher is better)",stream50,streaming,50%,49.9,60.000
+"Needle retrieval, 4k-16k (higher is better)",stream25,streaming,25%,25.0,20.000
+"Needle retrieval, 4k-16k (higher is better)",h2o50,h2o,50%,50.7,93.333
+"Needle retrieval, 4k-16k (higher is better)",h2o25,h2o,25%,25.4,22.222
+LongBench avg excl. passage_retrieval_en (higher is better),full,fp16,fp16,100.0,37.049
+LongBench avg excl. passage_retrieval_en (higher is better),int8,quant,int8,53.1,35.600
+LongBench avg excl. passage_retrieval_en (higher is better),kivi4,quant,KIVI-4,32.9,38.474
+LongBench avg excl. passage_retrieval_en (higher is better),kivi2,quant,KIVI-2,20.6,26.508
+LongBench avg excl. passage_retrieval_en (higher is better),stream50,streaming,50%,49.9,31.569
+LongBench avg excl. passage_retrieval_en (higher is better),stream25,streaming,25%,25.0,29.677
+LongBench avg excl. passage_retrieval_en (higher is better),h2o50,h2o,50%,50.7,33.515
+LongBench avg excl. passage_retrieval_en (higher is better),h2o25,h2o,25%,25.4,32.199
