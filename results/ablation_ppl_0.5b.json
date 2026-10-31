@@ -1,0 +1,321 @@
+{
+  "model": "Qwen/Qwen2.5-0.5B-Instruct",
+  "config": {
+    "model": "Qwen/Qwen2.5-0.5B-Instruct",
+    "dtype": "float16",
+    "dataset": {
+      "name": "Salesforce/wikitext",
+      "config": "wikitext-2-raw-v1",
+      "split": "test"
+    },
+    "window": 2048,
+    "prefix": 128,
+    "chunk": 16,
+    "num_windows": 16,
+    "batch_size": 8,
+    "methods": {
+      "full": {
+        "type": "full"
+      },
+      "kivi2": {
+        "type": "kivi",
+        "bits": 2,
+        "group_size": 32,
+        "residual": 128
+      },
+      "kivi2_r0": {
+        "type": "kivi",
+        "bits": 2,
+        "group_size": 32,
+        "residual": 0
+      },
+      "kivi2_r32": {
+        "type": "kivi",
+        "bits": 2,
+        "group_size": 32,
+        "residual": 32
+      },
+      "kivi2_r512": {
+        "type": "kivi",
+        "bits": 2,
+        "group_size": 32,
+        "residual": 512
+      },
+      "kivi2_g16": {
+        "type": "kivi",
+        "bits": 2,
+        "group_size": 16,
+        "residual": 128
+      },
+      "kivi2_g64": {
+        "type": "kivi",
+        "bits": 2,
+        "group_size": 64,
+        "residual": 128
+      },
+      "k4v2": {
+        "type": "quant",
+        "key_bits": 4,
+        "value_bits": 2,
+        "key_mode": "channel",
+        "value_mode": "token",
+        "key_group": 32,
+        "value_group": 32,
+        "residual": 128
+      },
+      "k2v4": {
+        "type": "quant",
+        "key_bits": 2,
+        "value_bits": 4,
+        "key_mode": "channel",
+        "value_mode": "token",
+        "key_group": 32,
+        "value_group": 32,
+        "residual": 128
+      },
+      "q2_tokenkeys": {
+        "type": "quant",
+        "key_bits": 2,
+        "value_bits": 2,
+        "key_mode": "token",
+        "value_mode": "token",
+        "key_group": 32,
+        "value_group": 32,
+        "residual": 128
+      },
+      "kivi4": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128
+      },
+      "q4_tokenkeys": {
+        "type": "quant",
+        "key_bits": 4,
+        "value_bits": 4,
+        "key_mode": "token",
+        "value_mode": "token",
+        "key_group": 32,
+        "value_group": 32,
+        "residual": 128
+      }
+    },
+    "output": "results/ablation_ppl_0.5b"
+  },
+  "env": {
+    "gpu": "Tesla T4",
+    "torch": "2.11.0+cu130",
+    "transformers": "5.22.1",
+    "python": "3.13.16",
+    "timestamp": "2026-10-31T19:42:02+00:00"
+  },
+  "n_windows": 16,
+  "scored_tokens_per_window": 1920,
+  "methods": {
+    "full": {
+      "spec": {
+        "type": "full"
+      },
+      "ppl": 13.089626613422613,
+      "nll_per_token": 2.57182005494833,
+      "scored_tokens": 30720,
+      "kv_bytes_per_token": 12288.0,
+      "peak_allocated_mib": 1412.88671875,
+      "seconds": 7.419062366999697,
+      "delta_ppl": 0.0,
+      "compression": 1.0
+    },
+    "kivi2": {
+      "spec": {
+        "type": "kivi",
+        "bits": 2,
+        "group_size": 32,
+        "residual": 128
+      },
+      "ppl": 16.613854837976916,
+      "nll_per_token": 2.810236976047357,
+      "scored_tokens": 30720,
+      "kv_bytes_per_token": 2928.0,
+      "peak_allocated_mib": 1269.63671875,
+      "seconds": 16.15989489100002,
+      "delta_ppl": 3.524228224554303,
+      "compression": 4.19672131147541
+    },
+    "kivi2_r0": {
+      "spec": {
+        "type": "kivi",
+        "bits": 2,
+        "group_size": 32,
+        "residual": 0
+      },
+      "ppl": 17.919536670519257,
+      "nll_per_token": 2.8858915517727532,
+      "scored_tokens": 30720,
+      "kv_bytes_per_token": 2304.0,
+      "peak_allocated_mib": 1257.63671875,
+      "seconds": 16.798057866999898,
+      "delta_ppl": 4.829910057096644,
+      "compression": 5.333333333333333
+    },
+    "kivi2_r32": {
+      "spec": {
+        "type": "kivi",
+        "bits": 2,
+        "group_size": 32,
+        "residual": 32
+      },
+      "ppl": 17.044496285252965,
+      "nll_per_token": 2.835827353099982,
+      "scored_tokens": 30720,
+      "kv_bytes_per_token": 2460.0,
+      "peak_allocated_mib": 1260.63671875,
+      "seconds": 16.704613731000336,
+      "delta_ppl": 3.9548696718303518,
+      "compression": 4.995121951219512
+    },
+    "kivi2_r512": {
+      "spec": {
+        "type": "kivi",
+        "bits": 2,
+        "group_size": 32,
+        "residual": 512
+      },
+      "ppl": 15.476600094653183,
+      "nll_per_token": 2.7393292119105657,
+      "scored_tokens": 30720,
+      "kv_bytes_per_token": 4800.0,
+      "peak_allocated_mib": 1308.85546875,
+      "seconds": 14.618369285999961,
+      "delta_ppl": 2.3869734812305694,
+      "compression": 2.56
+    },
+    "kivi2_g16": {
+      "spec": {
+        "type": "kivi",
+        "bits": 2,
+        "group_size": 16,
+        "residual": 128
+      },
+      "ppl": 14.792813239245522,
+      "nll_per_token": 2.6941414708892504,
+      "scored_tokens": 30720,
+      "kv_bytes_per_token": 3648.0,
+      "peak_allocated_mib": 1280.88671875,
+      "seconds": 18.031052507000368,
+      "delta_ppl": 1.7031866258229087,
+      "compression": 3.3684210526315788
+    },
+    "kivi2_g64": {
+      "spec": {
+        "type": "kivi",
+        "bits": 2,
+        "group_size": 64,
+        "residual": 128
+      },
+      "ppl": 19.665193105816275,
+      "nll_per_token": 2.978850225607554,
+      "scored_tokens": 30720,
+      "kv_bytes_per_token": 2568.0,
+      "peak_allocated_mib": 1265.13671875,
+      "seconds": 16.24042596499976,
+      "delta_ppl": 6.575566492393662,
+      "compression": 4.785046728971962
+    },
+    "k4v2": {
+      "spec": {
+        "type": "quant",
+        "key_bits": 4,
+        "value_bits": 2,
+        "key_mode": "channel",
+        "value_mode": "token",
+        "key_group": 32,
+        "value_group": 32,
+        "residual": 128
+      },
+      "ppl": 13.466594741169915,
+      "nll_per_token": 2.6002121552824975,
+      "scored_tokens": 30720,
+      "kv_bytes_per_token": 3648.0,
+      "peak_allocated_mib": 1281.63671875,
+      "seconds": 15.695174581999709,
+      "delta_ppl": 0.37696812774730226,
+      "compression": 3.3684210526315788
+    },
+    "k2v4": {
+      "spec": {
+        "type": "quant",
+        "key_bits": 2,
+        "value_bits": 4,
+        "key_mode": "channel",
+        "value_mode": "token",
+        "key_group": 32,
+        "value_group": 32,
+        "residual": 128
+      },
+      "ppl": 15.967492471088274,
+      "nll_per_token": 2.770554934938749,
+      "scored_tokens": 30720,
+      "kv_bytes_per_token": 3648.0,
+      "peak_allocated_mib": 1281.63671875,
+      "seconds": 15.258508737000284,
+      "delta_ppl": 2.877865857665661,
+      "compression": 3.3684210526315788
+    },
+    "q2_tokenkeys": {
+      "spec": {
+        "type": "quant",
+        "key_bits": 2,
+        "value_bits": 2,
+        "key_mode": "token",
+        "value_mode": "token",
+        "key_group": 32,
+        "value_group": 32,
+        "residual": 128
+      },
+      "ppl": 326.20668973826014,
+      "nll_per_token": 5.787531198064486,
+      "scored_tokens": 30720,
+      "kv_bytes_per_token": 2928.0,
+      "peak_allocated_mib": 1268.88671875,
+      "seconds": 17.725588327000423,
+      "delta_ppl": 313.1170631248375,
+      "compression": 4.19672131147541
+    },
+    "kivi4": {
+      "spec": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128
+      },
+      "ppl": 13.143007283191931,
+      "nll_per_token": 2.575889851649602,
+      "scored_tokens": 30720,
+      "kv_bytes_per_token": 4368.0,
+      "peak_allocated_mib": 1293.63671875,
+      "seconds": 14.951075343999946,
+      "delta_ppl": 0.05338066976931799,
+      "compression": 2.8131868131868134
+    },
+    "q4_tokenkeys": {
+      "spec": {
+        "type": "quant",
+        "key_bits": 4,
+        "value_bits": 4,
+        "key_mode": "token",
+        "value_mode": "token",
+        "key_group": 32,
+        "value_group": 32,
+        "residual": 128
+      },
+      "ppl": 25.380191937760195,
+      "nll_per_token": 3.233969024817149,
+      "scored_tokens": 30720,
+      "kv_bytes_per_token": 4368.0,
+      "peak_allocated_mib": 1292.88671875,
+      "seconds": 15.983564194999872,
+      "delta_ppl": 12.290565324337582,
+      "compression": 2.8131868131868134
+    }
+  }
+}

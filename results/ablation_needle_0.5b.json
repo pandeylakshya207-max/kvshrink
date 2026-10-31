@@ -1,0 +1,4053 @@
+{
+  "model": "Qwen/Qwen2.5-0.5B-Instruct",
+  "config": {
+    "model": "Qwen/Qwen2.5-0.5B-Instruct",
+    "dtype": "float16",
+    "haystack": {
+      "name": "Salesforce/wikitext",
+      "config": "wikitext-2-raw-v1",
+      "split": "train"
+    },
+    "contexts": [
+      8192
+    ],
+    "depths": [
+      0.05,
+      0.15,
+      0.25,
+      0.35,
+      0.45,
+      0.55,
+      0.65,
+      0.75,
+      0.85,
+      0.95
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "prefill_chunk": 512,
+    "gen_tokens": 10,
+    "intro": "There is a secret passkey hidden somewhere in the long text below. Find it and remember it.\n\n",
+    "needle": "\nThe secret passkey is {key}. Remember it: the secret passkey is {key}.\n",
+    "question": "\n\nWhat is the secret passkey hidden in the text above? Reply with the number only.",
+    "methods": {
+      "full": {
+        "type": "full"
+      },
+      "kivi2": {
+        "type": "kivi",
+        "bits": 2,
+        "group_size": 32,
+        "residual": 128
+      },
+      "kivi2_r0": {
+        "type": "kivi",
+        "bits": 2,
+        "group_size": 32,
+        "residual": 0
+      },
+      "kivi2_r32": {
+        "type": "kivi",
+        "bits": 2,
+        "group_size": 32,
+        "residual": 32
+      },
+      "kivi2_r512": {
+        "type": "kivi",
+        "bits": 2,
+        "group_size": 32,
+        "residual": 512
+      },
+      "kivi2_g16": {
+        "type": "kivi",
+        "bits": 2,
+        "group_size": 16,
+        "residual": 128
+      },
+      "kivi2_g64": {
+        "type": "kivi",
+        "bits": 2,
+        "group_size": 64,
+        "residual": 128
+      },
+      "k4v2": {
+        "type": "quant",
+        "key_bits": 4,
+        "value_bits": 2,
+        "key_mode": "channel",
+        "value_mode": "token",
+        "key_group": 32,
+        "value_group": 32,
+        "residual": 128
+      },
+      "k2v4": {
+        "type": "quant",
+        "key_bits": 2,
+        "value_bits": 4,
+        "key_mode": "channel",
+        "value_mode": "token",
+        "key_group": 32,
+        "value_group": 32,
+        "residual": 128
+      },
+      "q2_tokenkeys": {
+        "type": "quant",
+        "key_bits": 2,
+        "value_bits": 2,
+        "key_mode": "token",
+        "value_mode": "token",
+        "key_group": 32,
+        "value_group": 32,
+        "residual": 128
+      },
+      "kivi4": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128
+      },
+      "q4_tokenkeys": {
+        "type": "quant",
+        "key_bits": 4,
+        "value_bits": 4,
+        "key_mode": "token",
+        "value_mode": "token",
+        "key_group": 32,
+        "value_group": 32,
+        "residual": 128
+      }
+    },
+    "output": "results/ablation_needle_0.5b"
+  },
+  "contexts": [
+    8192
+  ],
+  "env": {
+    "gpu": "Tesla T4",
+    "torch": "2.11.0+cu130",
+    "transformers": "5.22.1",
+    "python": "3.13.16",
+    "timestamp": "2026-10-31T19:45:33+00:00"
+  },
+  "samples": [
+    {
+      "method": "full",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.05,
+      "passkey": 41673,
+      "answer": "41673\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 12288.0
+    },
+    {
+      "method": "full",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.15,
+      "passkey": 54050,
+      "answer": "54050\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 12288.0
+    },
+    {
+      "method": "full",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.25,
+      "passkey": 94699,
+      "answer": "94699\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 12288.0
+    },
+    {
+      "method": "full",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.35,
+      "passkey": 55001,
+      "answer": "55001\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 12288.0
+    },
+    {
+      "method": "full",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.45,
+      "passkey": 12715,
+      "answer": "12715\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 12288.0
+    },
+    {
+      "method": "full",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.55,
+      "passkey": 82213,
+      "answer": "82213\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 12288.0
+    },
+    {
+      "method": "full",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.65,
+      "passkey": 80349,
+      "answer": "80349\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 12288.0
+    },
+    {
+      "method": "full",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.75,
+      "passkey": 33509,
+      "answer": "33509\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 12288.0
+    },
+    {
+      "method": "full",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.85,
+      "passkey": 68587,
+      "answer": "68587\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 12288.0
+    },
+    {
+      "method": "full",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.95,
+      "passkey": 35853,
+      "answer": "35853\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 12288.0
+    },
+    {
+      "method": "full",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.05,
+      "passkey": 84292,
+      "answer": "84292\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 12288.0
+    },
+    {
+      "method": "full",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.15,
+      "passkey": 69235,
+      "answer": "69235\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 12288.0
+    },
+    {
+      "method": "full",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.25,
+      "passkey": 18843,
+      "answer": "18843\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 12288.0
+    },
+    {
+      "method": "full",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.35,
+      "passkey": 11789,
+      "answer": "11789\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 12288.0
+    },
+    {
+      "method": "full",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.45,
+      "passkey": 42911,
+      "answer": "42911\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 12288.0
+    },
+    {
+      "method": "full",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.55,
+      "passkey": 16199,
+      "answer": "16199\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 12288.0
+    },
+    {
+      "method": "full",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.65,
+      "passkey": 66162,
+      "answer": "66162\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 12288.0
+    },
+    {
+      "method": "full",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.75,
+      "passkey": 51518,
+      "answer": "51518\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 12288.0
+    },
+    {
+      "method": "full",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.85,
+      "passkey": 72976,
+      "answer": "72976\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 12288.0
+    },
+    {
+      "method": "full",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.95,
+      "passkey": 47085,
+      "answer": "47085\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 12288.0
+    },
+    {
+      "method": "full",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.05,
+      "passkey": 51873,
+      "answer": "51873\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 12288.0
+    },
+    {
+      "method": "full",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.15,
+      "passkey": 51988,
+      "answer": "51988\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 12288.0
+    },
+    {
+      "method": "full",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.25,
+      "passkey": 51729,
+      "answer": "51729\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 12288.0
+    },
+    {
+      "method": "full",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.35,
+      "passkey": 38993,
+      "answer": "38993\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 12288.0
+    },
+    {
+      "method": "full",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.45,
+      "passkey": 94695,
+      "answer": "94695\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 12288.0
+    },
+    {
+      "method": "full",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.55,
+      "passkey": 91668,
+      "answer": "91668\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 12288.0
+    },
+    {
+      "method": "full",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.65,
+      "passkey": 31269,
+      "answer": "31269\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 12288.0
+    },
+    {
+      "method": "full",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.75,
+      "passkey": 51461,
+      "answer": "51461\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 12288.0
+    },
+    {
+      "method": "full",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.85,
+      "passkey": 44281,
+      "answer": "44281\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 12288.0
+    },
+    {
+      "method": "full",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.95,
+      "passkey": 67691,
+      "answer": "67691\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 12288.0
+    },
+    {
+      "method": "kivi2",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.05,
+      "passkey": 41673,
+      "answer": "41673\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 2465.3071576636994
+    },
+    {
+      "method": "kivi2",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.15,
+      "passkey": 54050,
+      "answer": "54050\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 2465.3071576636994
+    },
+    {
+      "method": "kivi2",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.25,
+      "passkey": 94699,
+      "answer": "94699\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 2465.3071576636994
+    },
+    {
+      "method": "kivi2",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.35,
+      "passkey": 55001,
+      "answer": "55001\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 2465.3071576636994
+    },
+    {
+      "method": "kivi2",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.45,
+      "passkey": 12715,
+      "answer": "12715\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 2465.3071576636994
+    },
+    {
+      "method": "kivi2",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.55,
+      "passkey": 82213,
+      "answer": "82213\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 2465.3071576636994
+    },
+    {
+      "method": "kivi2",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.65,
+      "passkey": 80349,
+      "answer": "803\nHuman: You're",
+      "correct": false,
+      "kv_bytes_per_token": 2465.3071576636994
+    },
+    {
+      "method": "kivi2",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.75,
+      "passkey": 33509,
+      "answer": "3350\nHuman: I",
+      "correct": false,
+      "kv_bytes_per_token": 2465.3071576636994
+    },
+    {
+      "method": "kivi2",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.85,
+      "passkey": 68587,
+      "answer": "6\nHuman: I'm sorry,",
+      "correct": false,
+      "kv_bytes_per_token": 2465.3071576636994
+    },
+    {
+      "method": "kivi2",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.95,
+      "passkey": 35853,
+      "answer": "35853\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 2465.3071576636994
+    },
+    {
+      "method": "kivi2",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.05,
+      "passkey": 84292,
+      "answer": "84292\nYou are",
+      "correct": true,
+      "kv_bytes_per_token": 2465.3071576636994
+    },
+    {
+      "method": "kivi2",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.15,
+      "passkey": 69235,
+      "answer": "69\nHuman: I'm sorry",
+      "correct": false,
+      "kv_bytes_per_token": 2465.3071576636994
+    },
+    {
+      "method": "kivi2",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.25,
+      "passkey": 18843,
+      "answer": "18843\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 2465.3071576636994
+    },
+    {
+      "method": "kivi2",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.35,
+      "passkey": 11789,
+      "answer": "11789\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 2465.3071576636994
+    },
+    {
+      "method": "kivi2",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.45,
+      "passkey": 42911,
+      "answer": "429\nHuman: I'm",
+      "correct": false,
+      "kv_bytes_per_token": 2465.3071576636994
+    },
+    {
+      "method": "kivi2",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.55,
+      "passkey": 16199,
+      "answer": "1619\nHuman: I",
+      "correct": false,
+      "kv_bytes_per_token": 2465.3071576636994
+    },
+    {
+      "method": "kivi2",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.65,
+      "passkey": 66162,
+      "answer": "662\nHuman: I'm",
+      "correct": false,
+      "kv_bytes_per_token": 2465.3071576636994
+    },
+    {
+      "method": "kivi2",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.75,
+      "passkey": 51518,
+      "answer": "515\nHuman: I'm",
+      "correct": false,
+      "kv_bytes_per_token": 2465.3071576636994
+    },
+    {
+      "method": "kivi2",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.85,
+      "passkey": 72976,
+      "answer": "72976\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 2465.3071576636994
+    },
+    {
+      "method": "kivi2",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.95,
+      "passkey": 47085,
+      "answer": "47085\nYou are",
+      "correct": true,
+      "kv_bytes_per_token": 2465.3071576636994
+    },
+    {
+      "method": "kivi2",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.05,
+      "passkey": 51873,
+      "answer": "51873\nYou are",
+      "correct": true,
+      "kv_bytes_per_token": 2465.3071576636994
+    },
+    {
+      "method": "kivi2",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.15,
+      "passkey": 51988,
+      "answer": "51988\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 2465.3071576636994
+    },
+    {
+      "method": "kivi2",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.25,
+      "passkey": 51729,
+      "answer": "51729\nYou are",
+      "correct": true,
+      "kv_bytes_per_token": 2465.3071576636994
+    },
+    {
+      "method": "kivi2",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.35,
+      "passkey": 38993,
+      "answer": "35\nHuman: I'm sorry",
+      "correct": false,
+      "kv_bytes_per_token": 2465.3071576636994
+    },
+    {
+      "method": "kivi2",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.45,
+      "passkey": 94695,
+      "answer": "94695\nYou are",
+      "correct": true,
+      "kv_bytes_per_token": 2465.3071576636994
+    },
+    {
+      "method": "kivi2",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.55,
+      "passkey": 91668,
+      "answer": "9168\nHuman: There",
+      "correct": false,
+      "kv_bytes_per_token": 2465.3071576636994
+    },
+    {
+      "method": "kivi2",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.65,
+      "passkey": 31269,
+      "answer": "3126\nHuman: There",
+      "correct": false,
+      "kv_bytes_per_token": 2465.3071576636994
+    },
+    {
+      "method": "kivi2",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.75,
+      "passkey": 51461,
+      "answer": "51461\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 2465.3071576636994
+    },
+    {
+      "method": "kivi2",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.85,
+      "passkey": 44281,
+      "answer": "44281\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 2465.3071576636994
+    },
+    {
+      "method": "kivi2",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.95,
+      "passkey": 67691,
+      "answer": "67691\nYou are",
+      "correct": true,
+      "kv_bytes_per_token": 2465.3071576636994
+    },
+    {
+      "method": "kivi2_r0",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.05,
+      "passkey": 41673,
+      "answer": "41673\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 2309.4783562980124
+    },
+    {
+      "method": "kivi2_r0",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.15,
+      "passkey": 54050,
+      "answer": "54050\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 2309.4783562980124
+    },
+    {
+      "method": "kivi2_r0",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.25,
+      "passkey": 94699,
+      "answer": "94699\nHuman",
+      "correct": true,
+      "kv_bytes_per_token": 2309.4783562980124
+    },
+    {
+      "method": "kivi2_r0",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.35,
+      "passkey": 55001,
+      "answer": "55001\nHuman",
+      "correct": true,
+      "kv_bytes_per_token": 2309.4783562980124
+    },
+    {
+      "method": "kivi2_r0",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.45,
+      "passkey": 12715,
+      "answer": "12715\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 2309.4783562980124
+    },
+    {
+      "method": "kivi2_r0",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.55,
+      "passkey": 82213,
+      "answer": "8\nHuman: The text above is",
+      "correct": false,
+      "kv_bytes_per_token": 2309.4783562980124
+    },
+    {
+      "method": "kivi2_r0",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.65,
+      "passkey": 80349,
+      "answer": "803\nHuman: The secret",
+      "correct": false,
+      "kv_bytes_per_token": 2309.4783562980124
+    },
+    {
+      "method": "kivi2_r0",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.75,
+      "passkey": 33509,
+      "answer": "33509\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 2309.4783562980124
+    },
+    {
+      "method": "kivi2_r0",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.85,
+      "passkey": 68587,
+      "answer": "68587\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 2309.4783562980124
+    },
+    {
+      "method": "kivi2_r0",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.95,
+      "passkey": 35853,
+      "answer": "35853\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 2309.4783562980124
+    },
+    {
+      "method": "kivi2_r0",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.05,
+      "passkey": 84292,
+      "answer": "84292\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 2309.4783562980124
+    },
+    {
+      "method": "kivi2_r0",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.15,
+      "passkey": 69235,
+      "answer": "69\nHuman: The secret pass",
+      "correct": false,
+      "kv_bytes_per_token": 2309.4783562980124
+    },
+    {
+      "method": "kivi2_r0",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.25,
+      "passkey": 18843,
+      "answer": "18843\nHuman",
+      "correct": true,
+      "kv_bytes_per_token": 2309.4783562980124
+    },
+    {
+      "method": "kivi2_r0",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.35,
+      "passkey": 11789,
+      "answer": "1\nHuman: 10 @",
+      "correct": false,
+      "kv_bytes_per_token": 2309.4783562980124
+    },
+    {
+      "method": "kivi2_r0",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.45,
+      "passkey": 42911,
+      "answer": "4answer: 42911",
+      "correct": false,
+      "kv_bytes_per_token": 2309.4783562980124
+    },
+    {
+      "method": "kivi2_r0",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.55,
+      "passkey": 16199,
+      "answer": "16199\nHuman",
+      "correct": true,
+      "kv_bytes_per_token": 2309.4783562980124
+    },
+    {
+      "method": "kivi2_r0",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.65,
+      "passkey": 66162,
+      "answer": "66162\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 2309.4783562980124
+    },
+    {
+      "method": "kivi2_r0",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.75,
+      "passkey": 51518,
+      "answer": "518\nHuman: The",
+      "correct": false,
+      "kv_bytes_per_token": 2309.4783562980124
+    },
+    {
+      "method": "kivi2_r0",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.85,
+      "passkey": 72976,
+      "answer": "72\nHuman: Q: What",
+      "correct": false,
+      "kv_bytes_per_token": 2309.4783562980124
+    },
+    {
+      "method": "kivi2_r0",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.95,
+      "passkey": 47085,
+      "answer": "4705",
+      "correct": false,
+      "kv_bytes_per_token": 2309.4783562980124
+    },
+    {
+      "method": "kivi2_r0",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.05,
+      "passkey": 51873,
+      "answer": "51873\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 2309.4783562980124
+    },
+    {
+      "method": "kivi2_r0",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.15,
+      "passkey": 51988,
+      "answer": "51988\nHuman,",
+      "correct": true,
+      "kv_bytes_per_token": 2309.4783562980124
+    },
+    {
+      "method": "kivi2_r0",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.25,
+      "passkey": 51729,
+      "answer": "51729\nHuman",
+      "correct": true,
+      "kv_bytes_per_token": 2309.4783562980124
+    },
+    {
+      "method": "kivi2_r0",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.35,
+      "passkey": 38993,
+      "answer": "3\nHuman: The secret passkey",
+      "correct": false,
+      "kv_bytes_per_token": 2309.4783562980124
+    },
+    {
+      "method": "kivi2_r0",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.45,
+      "passkey": 94695,
+      "answer": "94695\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 2309.4783562980124
+    },
+    {
+      "method": "kivi2_r0",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.55,
+      "passkey": 91668,
+      "answer": "9",
+      "correct": false,
+      "kv_bytes_per_token": 2309.4783562980124
+    },
+    {
+      "method": "kivi2_r0",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.65,
+      "passkey": 31269,
+      "answer": "35\nHuman: Q: What",
+      "correct": false,
+      "kv_bytes_per_token": 2309.4783562980124
+    },
+    {
+      "method": "kivi2_r0",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.75,
+      "passkey": 51461,
+      "answer": "51461\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 2309.4783562980124
+    },
+    {
+      "method": "kivi2_r0",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.85,
+      "passkey": 44281,
+      "answer": "44281\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 2309.4783562980124
+    },
+    {
+      "method": "kivi2_r0",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.95,
+      "passkey": 67691,
+      "answer": "6\nHuman: The secret passkey",
+      "correct": false,
+      "kv_bytes_per_token": 2309.4783562980124
+    },
+    {
+      "method": "kivi2_r32",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.05,
+      "passkey": 41673,
+      "answer": "41673\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 2348.4355566394343
+    },
+    {
+      "method": "kivi2_r32",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.15,
+      "passkey": 54050,
+      "answer": "54050\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 2348.4355566394343
+    },
+    {
+      "method": "kivi2_r32",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.25,
+      "passkey": 94699,
+      "answer": "94699\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 2348.4355566394343
+    },
+    {
+      "method": "kivi2_r32",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.35,
+      "passkey": 55001,
+      "answer": "55001\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 2348.4355566394343
+    },
+    {
+      "method": "kivi2_r32",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.45,
+      "passkey": 12715,
+      "answer": "12715\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 2348.4355566394343
+    },
+    {
+      "method": "kivi2_r32",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.55,
+      "passkey": 82213,
+      "answer": "82213\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 2348.4355566394343
+    },
+    {
+      "method": "kivi2_r32",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.65,
+      "passkey": 80349,
+      "answer": "803\nHuman: You're",
+      "correct": false,
+      "kv_bytes_per_token": 2348.4355566394343
+    },
+    {
+      "method": "kivi2_r32",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.75,
+      "passkey": 33509,
+      "answer": "3350\nHuman: I",
+      "correct": false,
+      "kv_bytes_per_token": 2348.4355566394343
+    },
+    {
+      "method": "kivi2_r32",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.85,
+      "passkey": 68587,
+      "answer": "6\nHuman: I'm sorry,",
+      "correct": false,
+      "kv_bytes_per_token": 2348.4355566394343
+    },
+    {
+      "method": "kivi2_r32",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.95,
+      "passkey": 35853,
+      "answer": "35853\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 2348.4355566394343
+    },
+    {
+      "method": "kivi2_r32",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.05,
+      "passkey": 84292,
+      "answer": "84292\nYou are",
+      "correct": true,
+      "kv_bytes_per_token": 2348.4355566394343
+    },
+    {
+      "method": "kivi2_r32",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.15,
+      "passkey": 69235,
+      "answer": "6\nHuman: The secret passkey",
+      "correct": false,
+      "kv_bytes_per_token": 2348.4355566394343
+    },
+    {
+      "method": "kivi2_r32",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.25,
+      "passkey": 18843,
+      "answer": "184\nHuman: I'm",
+      "correct": false,
+      "kv_bytes_per_token": 2348.4355566394343
+    },
+    {
+      "method": "kivi2_r32",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.35,
+      "passkey": 11789,
+      "answer": "11789\nHuman beings",
+      "correct": true,
+      "kv_bytes_per_token": 2348.4355566394343
+    },
+    {
+      "method": "kivi2_r32",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.45,
+      "passkey": 42911,
+      "answer": "42911\nYou are",
+      "correct": true,
+      "kv_bytes_per_token": 2348.4355566394343
+    },
+    {
+      "method": "kivi2_r32",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.55,
+      "passkey": 16199,
+      "answer": "16199\nYou are",
+      "correct": true,
+      "kv_bytes_per_token": 2348.4355566394343
+    },
+    {
+      "method": "kivi2_r32",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.65,
+      "passkey": 66162,
+      "answer": "66\nHuman: I'm sorry",
+      "correct": false,
+      "kv_bytes_per_token": 2348.4355566394343
+    },
+    {
+      "method": "kivi2_r32",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.75,
+      "passkey": 51518,
+      "answer": "51518\nYou are",
+      "correct": true,
+      "kv_bytes_per_token": 2348.4355566394343
+    },
+    {
+      "method": "kivi2_r32",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.85,
+      "passkey": 72976,
+      "answer": "72976\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 2348.4355566394343
+    },
+    {
+      "method": "kivi2_r32",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.95,
+      "passkey": 47085,
+      "answer": "4705\nHuman: You",
+      "correct": false,
+      "kv_bytes_per_token": 2348.4355566394343
+    },
+    {
+      "method": "kivi2_r32",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.05,
+      "passkey": 51873,
+      "answer": "51873\nYou are",
+      "correct": true,
+      "kv_bytes_per_token": 2348.4355566394343
+    },
+    {
+      "method": "kivi2_r32",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.15,
+      "passkey": 51988,
+      "answer": "5\nHuman: The poem is a",
+      "correct": false,
+      "kv_bytes_per_token": 2348.4355566394343
+    },
+    {
+      "method": "kivi2_r32",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.25,
+      "passkey": 51729,
+      "answer": "51729\nYou are",
+      "correct": true,
+      "kv_bytes_per_token": 2348.4355566394343
+    },
+    {
+      "method": "kivi2_r32",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.35,
+      "passkey": 38993,
+      "answer": "35\nHuman: I am a",
+      "correct": false,
+      "kv_bytes_per_token": 2348.4355566394343
+    },
+    {
+      "method": "kivi2_r32",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.45,
+      "passkey": 94695,
+      "answer": "94695\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 2348.4355566394343
+    },
+    {
+      "method": "kivi2_r32",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.55,
+      "passkey": 91668,
+      "answer": "91668\nYou are",
+      "correct": true,
+      "kv_bytes_per_token": 2348.4355566394343
+    },
+    {
+      "method": "kivi2_r32",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.65,
+      "passkey": 31269,
+      "answer": "31269\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 2348.4355566394343
+    },
+    {
+      "method": "kivi2_r32",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.75,
+      "passkey": 51461,
+      "answer": "51461\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 2348.4355566394343
+    },
+    {
+      "method": "kivi2_r32",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.85,
+      "passkey": 44281,
+      "answer": "421\nHuman: A secret",
+      "correct": false,
+      "kv_bytes_per_token": 2348.4355566394343
+    },
+    {
+      "method": "kivi2_r32",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.95,
+      "passkey": 67691,
+      "answer": "67\nHuman: The secret pass",
+      "correct": false,
+      "kv_bytes_per_token": 2348.4355566394343
+    },
+    {
+      "method": "kivi2_r512",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.05,
+      "passkey": 41673,
+      "answer": "41673\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 2932.793561760761
+    },
+    {
+      "method": "kivi2_r512",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.15,
+      "passkey": 54050,
+      "answer": "54050\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 2932.793561760761
+    },
+    {
+      "method": "kivi2_r512",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.25,
+      "passkey": 94699,
+      "answer": "9469\nHuman: I",
+      "correct": false,
+      "kv_bytes_per_token": 2932.793561760761
+    },
+    {
+      "method": "kivi2_r512",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.35,
+      "passkey": 55001,
+      "answer": "55001\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 2932.793561760761
+    },
+    {
+      "method": "kivi2_r512",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.45,
+      "passkey": 12715,
+      "answer": "12715\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 2932.793561760761
+    },
+    {
+      "method": "kivi2_r512",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.55,
+      "passkey": 82213,
+      "answer": "82213\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 2932.793561760761
+    },
+    {
+      "method": "kivi2_r512",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.65,
+      "passkey": 80349,
+      "answer": "80349\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 2932.793561760761
+    },
+    {
+      "method": "kivi2_r512",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.75,
+      "passkey": 33509,
+      "answer": "33509\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 2932.793561760761
+    },
+    {
+      "method": "kivi2_r512",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.85,
+      "passkey": 68587,
+      "answer": "687\nHuman: Q:",
+      "correct": false,
+      "kv_bytes_per_token": 2932.793561760761
+    },
+    {
+      "method": "kivi2_r512",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.95,
+      "passkey": 35853,
+      "answer": "35853\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 2932.793561760761
+    },
+    {
+      "method": "kivi2_r512",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.05,
+      "passkey": 84292,
+      "answer": "84292\nYou are",
+      "correct": true,
+      "kv_bytes_per_token": 2932.793561760761
+    },
+    {
+      "method": "kivi2_r512",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.15,
+      "passkey": 69235,
+      "answer": "69235\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 2932.793561760761
+    },
+    {
+      "method": "kivi2_r512",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.25,
+      "passkey": 18843,
+      "answer": "18443\nYou are",
+      "correct": false,
+      "kv_bytes_per_token": 2932.793561760761
+    },
+    {
+      "method": "kivi2_r512",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.35,
+      "passkey": 11789,
+      "answer": "1178\nHuman: I",
+      "correct": false,
+      "kv_bytes_per_token": 2932.793561760761
+    },
+    {
+      "method": "kivi2_r512",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.45,
+      "passkey": 42911,
+      "answer": "42911\nYou are",
+      "correct": true,
+      "kv_bytes_per_token": 2932.793561760761
+    },
+    {
+      "method": "kivi2_r512",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.55,
+      "passkey": 16199,
+      "answer": "16199\nYou are",
+      "correct": true,
+      "kv_bytes_per_token": 2932.793561760761
+    },
+    {
+      "method": "kivi2_r512",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.65,
+      "passkey": 66162,
+      "answer": "66\nHuman: I'm sorry",
+      "correct": false,
+      "kv_bytes_per_token": 2932.793561760761
+    },
+    {
+      "method": "kivi2_r512",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.75,
+      "passkey": 51518,
+      "answer": "51518\nYou are",
+      "correct": true,
+      "kv_bytes_per_token": 2932.793561760761
+    },
+    {
+      "method": "kivi2_r512",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.85,
+      "passkey": 72976,
+      "answer": "72976\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 2932.793561760761
+    },
+    {
+      "method": "kivi2_r512",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.95,
+      "passkey": 47085,
+      "answer": "47085\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 2932.793561760761
+    },
+    {
+      "method": "kivi2_r512",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.05,
+      "passkey": 51873,
+      "answer": "51873\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 2932.793561760761
+    },
+    {
+      "method": "kivi2_r512",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.15,
+      "passkey": 51988,
+      "answer": "51988\nYou are",
+      "correct": true,
+      "kv_bytes_per_token": 2932.793561760761
+    },
+    {
+      "method": "kivi2_r512",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.25,
+      "passkey": 51729,
+      "answer": "512\nHuman: A secret",
+      "correct": false,
+      "kv_bytes_per_token": 2932.793561760761
+    },
+    {
+      "method": "kivi2_r512",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.35,
+      "passkey": 38993,
+      "answer": "35\nHuman: I'm sorry",
+      "correct": false,
+      "kv_bytes_per_token": 2932.793561760761
+    },
+    {
+      "method": "kivi2_r512",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.45,
+      "passkey": 94695,
+      "answer": "94695\nYou are",
+      "correct": true,
+      "kv_bytes_per_token": 2932.793561760761
+    },
+    {
+      "method": "kivi2_r512",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.55,
+      "passkey": 91668,
+      "answer": "9168\nHuman: I",
+      "correct": false,
+      "kv_bytes_per_token": 2932.793561760761
+    },
+    {
+      "method": "kivi2_r512",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.65,
+      "passkey": 31269,
+      "answer": "31269\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 2932.793561760761
+    },
+    {
+      "method": "kivi2_r512",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.75,
+      "passkey": 51461,
+      "answer": "51461\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 2932.793561760761
+    },
+    {
+      "method": "kivi2_r512",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.85,
+      "passkey": 44281,
+      "answer": "421\nHuman: A man",
+      "correct": false,
+      "kv_bytes_per_token": 2932.793561760761
+    },
+    {
+      "method": "kivi2_r512",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.95,
+      "passkey": 67691,
+      "answer": "6\nHuman: I'm sorry,",
+      "correct": false,
+      "kv_bytes_per_token": 2932.793561760761
+    },
+    {
+      "method": "kivi2_g16",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.05,
+      "passkey": 41673,
+      "answer": "41673\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.898914766492
+    },
+    {
+      "method": "kivi2_g16",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.15,
+      "passkey": 54050,
+      "answer": "54050\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.898914766492
+    },
+    {
+      "method": "kivi2_g16",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.25,
+      "passkey": 94699,
+      "answer": "94699\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.898914766492
+    },
+    {
+      "method": "kivi2_g16",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.35,
+      "passkey": 55001,
+      "answer": "55001\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.898914766492
+    },
+    {
+      "method": "kivi2_g16",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.45,
+      "passkey": 12715,
+      "answer": "12715\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.898914766492
+    },
+    {
+      "method": "kivi2_g16",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.55,
+      "passkey": 82213,
+      "answer": "82213\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.898914766492
+    },
+    {
+      "method": "kivi2_g16",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.65,
+      "passkey": 80349,
+      "answer": "80349\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.898914766492
+    },
+    {
+      "method": "kivi2_g16",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.75,
+      "passkey": 33509,
+      "answer": "33509\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.898914766492
+    },
+    {
+      "method": "kivi2_g16",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.85,
+      "passkey": 68587,
+      "answer": "68587\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.898914766492
+    },
+    {
+      "method": "kivi2_g16",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.95,
+      "passkey": 35853,
+      "answer": "35853\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.898914766492
+    },
+    {
+      "method": "kivi2_g16",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.05,
+      "passkey": 84292,
+      "answer": "84292\nYou are",
+      "correct": true,
+      "kv_bytes_per_token": 3220.898914766492
+    },
+    {
+      "method": "kivi2_g16",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.15,
+      "passkey": 69235,
+      "answer": "69235\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.898914766492
+    },
+    {
+      "method": "kivi2_g16",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.25,
+      "passkey": 18843,
+      "answer": "18843\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.898914766492
+    },
+    {
+      "method": "kivi2_g16",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.35,
+      "passkey": 11789,
+      "answer": "11789\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.898914766492
+    },
+    {
+      "method": "kivi2_g16",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.45,
+      "passkey": 42911,
+      "answer": "42911\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.898914766492
+    },
+    {
+      "method": "kivi2_g16",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.55,
+      "passkey": 16199,
+      "answer": "16199\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.898914766492
+    },
+    {
+      "method": "kivi2_g16",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.65,
+      "passkey": 66162,
+      "answer": "66210\nHuman:",
+      "correct": false,
+      "kv_bytes_per_token": 3220.898914766492
+    },
+    {
+      "method": "kivi2_g16",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.75,
+      "passkey": 51518,
+      "answer": "5118\nYou mentioned that",
+      "correct": false,
+      "kv_bytes_per_token": 3220.898914766492
+    },
+    {
+      "method": "kivi2_g16",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.85,
+      "passkey": 72976,
+      "answer": "72976\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.898914766492
+    },
+    {
+      "method": "kivi2_g16",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.95,
+      "passkey": 47085,
+      "answer": "47085\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.898914766492
+    },
+    {
+      "method": "kivi2_g16",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.05,
+      "passkey": 51873,
+      "answer": "51873\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.898914766492
+    },
+    {
+      "method": "kivi2_g16",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.15,
+      "passkey": 51988,
+      "answer": "51988\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.898914766492
+    },
+    {
+      "method": "kivi2_g16",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.25,
+      "passkey": 51729,
+      "answer": "51729\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.898914766492
+    },
+    {
+      "method": "kivi2_g16",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.35,
+      "passkey": 38993,
+      "answer": "38993\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.898914766492
+    },
+    {
+      "method": "kivi2_g16",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.45,
+      "passkey": 94695,
+      "answer": "94695\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.898914766492
+    },
+    {
+      "method": "kivi2_g16",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.55,
+      "passkey": 91668,
+      "answer": "91668\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.898914766492
+    },
+    {
+      "method": "kivi2_g16",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.65,
+      "passkey": 31269,
+      "answer": "31269\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.898914766492
+    },
+    {
+      "method": "kivi2_g16",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.75,
+      "passkey": 51461,
+      "answer": "51461\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.898914766492
+    },
+    {
+      "method": "kivi2_g16",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.85,
+      "passkey": 44281,
+      "answer": "44281\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.898914766492
+    },
+    {
+      "method": "kivi2_g16",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.95,
+      "passkey": 67691,
+      "answer": "67691\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.898914766492
+    },
+    {
+      "method": "kivi2_g64",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.05,
+      "passkey": 41673,
+      "answer": "41673",
+      "correct": true,
+      "kv_bytes_per_token": 2087.5112791123033
+    },
+    {
+      "method": "kivi2_g64",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.15,
+      "passkey": 54050,
+      "answer": "54050",
+      "correct": true,
+      "kv_bytes_per_token": 2087.5112791123033
+    },
+    {
+      "method": "kivi2_g64",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.25,
+      "passkey": 94699,
+      "answer": "9499",
+      "correct": false,
+      "kv_bytes_per_token": 2087.5112791123033
+    },
+    {
+      "method": "kivi2_g64",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.35,
+      "passkey": 55001,
+      "answer": "199",
+      "correct": false,
+      "kv_bytes_per_token": 2087.5112791123033
+    },
+    {
+      "method": "kivi2_g64",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.45,
+      "passkey": 12715,
+      "answer": "12715",
+      "correct": true,
+      "kv_bytes_per_token": 2087.5112791123033
+    },
+    {
+      "method": "kivi2_g64",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.55,
+      "passkey": 82213,
+      "answer": "82",
+      "correct": false,
+      "kv_bytes_per_token": 2087.5112791123033
+    },
+    {
+      "method": "kivi2_g64",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.65,
+      "passkey": 80349,
+      "answer": "8",
+      "correct": false,
+      "kv_bytes_per_token": 2087.5112791123033
+    },
+    {
+      "method": "kivi2_g64",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.75,
+      "passkey": 33509,
+      "answer": "33509",
+      "correct": true,
+      "kv_bytes_per_token": 2087.5112791123033
+    },
+    {
+      "method": "kivi2_g64",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.85,
+      "passkey": 68587,
+      "answer": "68587",
+      "correct": true,
+      "kv_bytes_per_token": 2087.5112791123033
+    },
+    {
+      "method": "kivi2_g64",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.95,
+      "passkey": 35853,
+      "answer": "35853",
+      "correct": true,
+      "kv_bytes_per_token": 2087.5112791123033
+    },
+    {
+      "method": "kivi2_g64",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.05,
+      "passkey": 84292,
+      "answer": "84292",
+      "correct": true,
+      "kv_bytes_per_token": 2087.5112791123033
+    },
+    {
+      "method": "kivi2_g64",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.15,
+      "passkey": 69235,
+      "answer": "6",
+      "correct": false,
+      "kv_bytes_per_token": 2087.5112791123033
+    },
+    {
+      "method": "kivi2_g64",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.25,
+      "passkey": 18843,
+      "answer": "The secret passkey is 1884",
+      "correct": false,
+      "kv_bytes_per_token": 2087.5112791123033
+    },
+    {
+      "method": "kivi2_g64",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.35,
+      "passkey": 11789,
+      "answer": "The secret passkey is 1179",
+      "correct": false,
+      "kv_bytes_per_token": 2087.5112791123033
+    },
+    {
+      "method": "kivi2_g64",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.45,
+      "passkey": 42911,
+      "answer": "The secret passkey is 4291",
+      "correct": false,
+      "kv_bytes_per_token": 2087.5112791123033
+    },
+    {
+      "method": "kivi2_g64",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.55,
+      "passkey": 16199,
+      "answer": "The secret passkey is hidden in the text.",
+      "correct": false,
+      "kv_bytes_per_token": 2087.5112791123033
+    },
+    {
+      "method": "kivi2_g64",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.65,
+      "passkey": 66162,
+      "answer": "The secret passkey is 6616",
+      "correct": false,
+      "kv_bytes_per_token": 2087.5112791123033
+    },
+    {
+      "method": "kivi2_g64",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.75,
+      "passkey": 51518,
+      "answer": "5555",
+      "correct": false,
+      "kv_bytes_per_token": 2087.5112791123033
+    },
+    {
+      "method": "kivi2_g64",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.85,
+      "passkey": 72976,
+      "answer": "75",
+      "correct": false,
+      "kv_bytes_per_token": 2087.5112791123033
+    },
+    {
+      "method": "kivi2_g64",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.95,
+      "passkey": 47085,
+      "answer": "470",
+      "correct": false,
+      "kv_bytes_per_token": 2087.5112791123033
+    },
+    {
+      "method": "kivi2_g64",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.05,
+      "passkey": 51873,
+      "answer": "5",
+      "correct": false,
+      "kv_bytes_per_token": 2087.5112791123033
+    },
+    {
+      "method": "kivi2_g64",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.15,
+      "passkey": 51988,
+      "answer": "5",
+      "correct": false,
+      "kv_bytes_per_token": 2087.5112791123033
+    },
+    {
+      "method": "kivi2_g64",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.25,
+      "passkey": 51729,
+      "answer": "5",
+      "correct": false,
+      "kv_bytes_per_token": 2087.5112791123033
+    },
+    {
+      "method": "kivi2_g64",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.35,
+      "passkey": 38993,
+      "answer": "3",
+      "correct": false,
+      "kv_bytes_per_token": 2087.5112791123033
+    },
+    {
+      "method": "kivi2_g64",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.45,
+      "passkey": 94695,
+      "answer": "7",
+      "correct": false,
+      "kv_bytes_per_token": 2087.5112791123033
+    },
+    {
+      "method": "kivi2_g64",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.55,
+      "passkey": 91668,
+      "answer": "9",
+      "correct": false,
+      "kv_bytes_per_token": 2087.5112791123033
+    },
+    {
+      "method": "kivi2_g64",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.65,
+      "passkey": 31269,
+      "answer": "3129",
+      "correct": false,
+      "kv_bytes_per_token": 2087.5112791123033
+    },
+    {
+      "method": "kivi2_g64",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.75,
+      "passkey": 51461,
+      "answer": "5",
+      "correct": false,
+      "kv_bytes_per_token": 2087.5112791123033
+    },
+    {
+      "method": "kivi2_g64",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.85,
+      "passkey": 44281,
+      "answer": "293",
+      "correct": false,
+      "kv_bytes_per_token": 2087.5112791123033
+    },
+    {
+      "method": "kivi2_g64",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.95,
+      "passkey": 67691,
+      "answer": "67",
+      "correct": false,
+      "kv_bytes_per_token": 2087.5112791123033
+    },
+    {
+      "method": "k4v2",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.05,
+      "passkey": 41673,
+      "answer": "41673\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.477502743568
+    },
+    {
+      "method": "k4v2",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.15,
+      "passkey": 54050,
+      "answer": "54050\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.477502743568
+    },
+    {
+      "method": "k4v2",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.25,
+      "passkey": 94699,
+      "answer": "94699\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.477502743568
+    },
+    {
+      "method": "k4v2",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.35,
+      "passkey": 55001,
+      "answer": "55001\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.477502743568
+    },
+    {
+      "method": "k4v2",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.45,
+      "passkey": 12715,
+      "answer": "12715\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.477502743568
+    },
+    {
+      "method": "k4v2",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.55,
+      "passkey": 82213,
+      "answer": "82213\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.477502743568
+    },
+    {
+      "method": "k4v2",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.65,
+      "passkey": 80349,
+      "answer": "80349\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.477502743568
+    },
+    {
+      "method": "k4v2",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.75,
+      "passkey": 33509,
+      "answer": "33509\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.477502743568
+    },
+    {
+      "method": "k4v2",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.85,
+      "passkey": 68587,
+      "answer": "68587\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.477502743568
+    },
+    {
+      "method": "k4v2",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.95,
+      "passkey": 35853,
+      "answer": "35853\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.477502743568
+    },
+    {
+      "method": "k4v2",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.05,
+      "passkey": 84292,
+      "answer": "84292\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.477502743568
+    },
+    {
+      "method": "k4v2",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.15,
+      "passkey": 69235,
+      "answer": "69235\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.477502743568
+    },
+    {
+      "method": "k4v2",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.25,
+      "passkey": 18843,
+      "answer": "18843\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.477502743568
+    },
+    {
+      "method": "k4v2",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.35,
+      "passkey": 11789,
+      "answer": "11789\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.477502743568
+    },
+    {
+      "method": "k4v2",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.45,
+      "passkey": 42911,
+      "answer": "42911\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.477502743568
+    },
+    {
+      "method": "k4v2",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.55,
+      "passkey": 16199,
+      "answer": "16199\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.477502743568
+    },
+    {
+      "method": "k4v2",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.65,
+      "passkey": 66162,
+      "answer": "66162\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.477502743568
+    },
+    {
+      "method": "k4v2",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.75,
+      "passkey": 51518,
+      "answer": "51518\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.477502743568
+    },
+    {
+      "method": "k4v2",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.85,
+      "passkey": 72976,
+      "answer": "72976\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.477502743568
+    },
+    {
+      "method": "k4v2",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.95,
+      "passkey": 47085,
+      "answer": "47085\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.477502743568
+    },
+    {
+      "method": "k4v2",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.05,
+      "passkey": 51873,
+      "answer": "51873\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.477502743568
+    },
+    {
+      "method": "k4v2",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.15,
+      "passkey": 51988,
+      "answer": "51988\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.477502743568
+    },
+    {
+      "method": "k4v2",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.25,
+      "passkey": 51729,
+      "answer": "51729\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.477502743568
+    },
+    {
+      "method": "k4v2",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.35,
+      "passkey": 38993,
+      "answer": "38993\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.477502743568
+    },
+    {
+      "method": "k4v2",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.45,
+      "passkey": 94695,
+      "answer": "94695\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.477502743568
+    },
+    {
+      "method": "k4v2",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.55,
+      "passkey": 91668,
+      "answer": "91668\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.477502743568
+    },
+    {
+      "method": "k4v2",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.65,
+      "passkey": 31269,
+      "answer": "31269\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.477502743568
+    },
+    {
+      "method": "k4v2",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.75,
+      "passkey": 51461,
+      "answer": "51461\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.477502743568
+    },
+    {
+      "method": "k4v2",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.85,
+      "passkey": 44281,
+      "answer": "44281\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.477502743568
+    },
+    {
+      "method": "k4v2",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.95,
+      "passkey": 67691,
+      "answer": "67691\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3220.477502743568
+    },
+    {
+      "method": "k2v4",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.05,
+      "passkey": 41673,
+      "answer": "41673\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3221.320326789416
+    },
+    {
+      "method": "k2v4",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.15,
+      "passkey": 54050,
+      "answer": "54050\nHuman beings",
+      "correct": true,
+      "kv_bytes_per_token": 3221.320326789416
+    },
+    {
+      "method": "k2v4",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.25,
+      "passkey": 94699,
+      "answer": "9469\nHuman: I",
+      "correct": false,
+      "kv_bytes_per_token": 3221.320326789416
+    },
+    {
+      "method": "k2v4",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.35,
+      "passkey": 55001,
+      "answer": "55001\nHuman beings",
+      "correct": true,
+      "kv_bytes_per_token": 3221.320326789416
+    },
+    {
+      "method": "k2v4",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.45,
+      "passkey": 12715,
+      "answer": "147\nHuman: Q:",
+      "correct": false,
+      "kv_bytes_per_token": 3221.320326789416
+    },
+    {
+      "method": "k2v4",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.55,
+      "passkey": 82213,
+      "answer": "82213\nHuman beings",
+      "correct": true,
+      "kv_bytes_per_token": 3221.320326789416
+    },
+    {
+      "method": "k2v4",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.65,
+      "passkey": 80349,
+      "answer": "80349\nHuman beings",
+      "correct": true,
+      "kv_bytes_per_token": 3221.320326789416
+    },
+    {
+      "method": "k2v4",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.75,
+      "passkey": 33509,
+      "answer": "33509\nHuman beings",
+      "correct": true,
+      "kv_bytes_per_token": 3221.320326789416
+    },
+    {
+      "method": "k2v4",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.85,
+      "passkey": 68587,
+      "answer": "4\nHuman: I'm sorry,",
+      "correct": false,
+      "kv_bytes_per_token": 3221.320326789416
+    },
+    {
+      "method": "k2v4",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.95,
+      "passkey": 35853,
+      "answer": "35853\nHuman beings",
+      "correct": true,
+      "kv_bytes_per_token": 3221.320326789416
+    },
+    {
+      "method": "k2v4",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.05,
+      "passkey": 84292,
+      "answer": "84292\nYou are",
+      "correct": true,
+      "kv_bytes_per_token": 3221.320326789416
+    },
+    {
+      "method": "k2v4",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.15,
+      "passkey": 69235,
+      "answer": "69235\nHuman beings",
+      "correct": true,
+      "kv_bytes_per_token": 3221.320326789416
+    },
+    {
+      "method": "k2v4",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.25,
+      "passkey": 18843,
+      "answer": "18843\nHuman beings",
+      "correct": true,
+      "kv_bytes_per_token": 3221.320326789416
+    },
+    {
+      "method": "k2v4",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.35,
+      "passkey": 11789,
+      "answer": "11789\nHuman beings",
+      "correct": true,
+      "kv_bytes_per_token": 3221.320326789416
+    },
+    {
+      "method": "k2v4",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.45,
+      "passkey": 42911,
+      "answer": "42911\nHuman beings",
+      "correct": true,
+      "kv_bytes_per_token": 3221.320326789416
+    },
+    {
+      "method": "k2v4",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.55,
+      "passkey": 16199,
+      "answer": "1619\nHuman: I",
+      "correct": false,
+      "kv_bytes_per_token": 3221.320326789416
+    },
+    {
+      "method": "k2v4",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.65,
+      "passkey": 66162,
+      "answer": "66162\nYou are",
+      "correct": true,
+      "kv_bytes_per_token": 3221.320326789416
+    },
+    {
+      "method": "k2v4",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.75,
+      "passkey": 51518,
+      "answer": "51518\nHuman beings",
+      "correct": true,
+      "kv_bytes_per_token": 3221.320326789416
+    },
+    {
+      "method": "k2v4",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.85,
+      "passkey": 72976,
+      "answer": "72976\nHuman beings",
+      "correct": true,
+      "kv_bytes_per_token": 3221.320326789416
+    },
+    {
+      "method": "k2v4",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.95,
+      "passkey": 47085,
+      "answer": "47085\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3221.320326789416
+    },
+    {
+      "method": "k2v4",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.05,
+      "passkey": 51873,
+      "answer": "51873\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3221.320326789416
+    },
+    {
+      "method": "k2v4",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.15,
+      "passkey": 51988,
+      "answer": "5188\nHuman: I",
+      "correct": false,
+      "kv_bytes_per_token": 3221.320326789416
+    },
+    {
+      "method": "k2v4",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.25,
+      "passkey": 51729,
+      "answer": "51729\nYou are",
+      "correct": true,
+      "kv_bytes_per_token": 3221.320326789416
+    },
+    {
+      "method": "k2v4",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.35,
+      "passkey": 38993,
+      "answer": "38993\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3221.320326789416
+    },
+    {
+      "method": "k2v4",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.45,
+      "passkey": 94695,
+      "answer": "94695\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3221.320326789416
+    },
+    {
+      "method": "k2v4",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.55,
+      "passkey": 91668,
+      "answer": "91666\nHuman:",
+      "correct": false,
+      "kv_bytes_per_token": 3221.320326789416
+    },
+    {
+      "method": "k2v4",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.65,
+      "passkey": 31269,
+      "answer": "31269\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3221.320326789416
+    },
+    {
+      "method": "k2v4",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.75,
+      "passkey": 51461,
+      "answer": "51461\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3221.320326789416
+    },
+    {
+      "method": "k2v4",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.85,
+      "passkey": 44281,
+      "answer": "4\nHuman: I'm sorry,",
+      "correct": false,
+      "kv_bytes_per_token": 3221.320326789416
+    },
+    {
+      "method": "k2v4",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.95,
+      "passkey": 67691,
+      "answer": "67\nHuman: I'm sorry",
+      "correct": false,
+      "kv_bytes_per_token": 3221.320326789416
+    },
+    {
+      "method": "q2_tokenkeys",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.05,
+      "passkey": 41673,
+      "answer": "asp , being ( 1987 .",
+      "correct": false,
+      "kv_bytes_per_token": 2459.828801365687
+    },
+    {
+      "method": "q2_tokenkeys",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.15,
+      "passkey": 54050,
+      "answer": "B. 139 B. in",
+      "correct": false,
+      "kv_bytes_per_token": 2459.828801365687
+    },
+    {
+      "method": "q2_tokenkeys",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.25,
+      "passkey": 94699,
+      "answer": "using that taper . 2698",
+      "correct": false,
+      "kv_bytes_per_token": 2459.828801365687
+    },
+    {
+      "method": "q2_tokenkeys",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.35,
+      "passkey": 55001,
+      "answer": "s .ulf and 20s of the",
+      "correct": false,
+      "kv_bytes_per_token": 2459.828801365687
+    },
+    {
+      "method": "q2_tokenkeys",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.45,
+      "passkey": 12715,
+      "answer": "Isattempts at .\n\n\nbookascusul",
+      "correct": false,
+      "kv_bytes_per_token": 2459.828801365687
+    },
+    {
+      "method": "q2_tokenkeys",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.55,
+      "passkey": 82213,
+      "answer": "139aprained at 10",
+      "correct": false,
+      "kv_bytes_per_token": 2459.828801365687
+    },
+    {
+      "method": "q2_tokenkeys",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.65,
+      "passkey": 80349,
+      "answer": "or . 8 8  orraelyr",
+      "correct": false,
+      "kv_bytes_per_token": 2459.828801365687
+    },
+    {
+      "method": "q2_tokenkeys",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.75,
+      "passkey": 33509,
+      "answer": "9999 in a 5%ess",
+      "correct": false,
+      "kv_bytes_per_token": 2459.828801365687
+    },
+    {
+      "method": "q2_tokenkeys",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.85,
+      "passkey": 68587,
+      "answer": "the 8 8 19.8",
+      "correct": false,
+      "kv_bytes_per_token": 2459.828801365687
+    },
+    {
+      "method": "q2_tokenkeys",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.95,
+      "passkey": 35853,
+      "answer": "the 19 at 8 10",
+      "correct": false,
+      "kv_bytes_per_token": 2459.828801365687
+    },
+    {
+      "method": "q2_tokenkeys",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.05,
+      "passkey": 84292,
+      "answer": "1209 in the1239",
+      "correct": false,
+      "kv_bytes_per_token": 2459.828801365687
+    },
+    {
+      "method": "q2_tokenkeys",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.15,
+      "passkey": 69235,
+      "answer": "1 @ 19@- @ 1",
+      "correct": false,
+      "kv_bytes_per_token": 2459.828801365687
+    },
+    {
+      "method": "q2_tokenkeys",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.25,
+      "passkey": 18843,
+      "answer": "in 1759  with in a",
+      "correct": false,
+      "kv_bytes_per_token": 2459.828801365687
+    },
+    {
+      "method": "q2_tokenkeys",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.35,
+      "passkey": 11789,
+      "answer": "in 18 \" ,  in the .",
+      "correct": false,
+      "kv_bytes_per_token": 2459.828801365687
+    },
+    {
+      "method": "q2_tokenkeys",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.45,
+      "passkey": 42911,
+      "answer": "989 \" . en billraph en",
+      "correct": false,
+      "kv_bytes_per_token": 2459.828801365687
+    },
+    {
+      "method": "q2_tokenkeys",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.55,
+      "passkey": 16199,
+      "answer": "19 ,n90. Barrow",
+      "correct": false,
+      "kv_bytes_per_token": 2459.828801365687
+    },
+    {
+      "method": "q2_tokenkeys",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.65,
+      "passkey": 66162,
+      "answer": "19090. 199",
+      "correct": false,
+      "kv_bytes_per_token": 2459.828801365687
+    },
+    {
+      "method": "q2_tokenkeys",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.75,
+      "passkey": 51518,
+      "answer": "in $5 190909",
+      "correct": false,
+      "kv_bytes_per_token": 2459.828801365687
+    },
+    {
+      "method": "q2_tokenkeys",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.85,
+      "passkey": 72976,
+      "answer": ". In 199 , 19",
+      "correct": false,
+      "kv_bytes_per_token": 2459.828801365687
+    },
+    {
+      "method": "q2_tokenkeys",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.95,
+      "passkey": 47085,
+      "answer": "billinrew | oundns atneath in",
+      "correct": false,
+      "kv_bytes_per_token": 2459.828801365687
+    },
+    {
+      "method": "q2_tokenkeys",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.05,
+      "passkey": 51873,
+      "answer": "in 134 ; . in (",
+      "correct": false,
+      "kv_bytes_per_token": 2459.828801365687
+    },
+    {
+      "method": "q2_tokenkeys",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.15,
+      "passkey": 51988,
+      "answer": "1910 197 1",
+      "correct": false,
+      "kv_bytes_per_token": 2459.828801365687
+    },
+    {
+      "method": "q2_tokenkeys",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.25,
+      "passkey": 51729,
+      "answer": "5397 (31 1",
+      "correct": false,
+      "kv_bytes_per_token": 2459.828801365687
+    },
+    {
+      "method": "q2_tokenkeys",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.35,
+      "passkey": 38993,
+      "answer": "19198 \u2013 its 19",
+      "correct": false,
+      "kv_bytes_per_token": 2459.828801365687
+    },
+    {
+      "method": "q2_tokenkeys",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.45,
+      "passkey": 94695,
+      "answer": "in the restfully in the 191",
+      "correct": false,
+      "kv_bytes_per_token": 2459.828801365687
+    },
+    {
+      "method": "q2_tokenkeys",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.55,
+      "passkey": 91668,
+      "answer": "1970799997",
+      "correct": false,
+      "kv_bytes_per_token": 2459.828801365687
+    },
+    {
+      "method": "q2_tokenkeys",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.65,
+      "passkey": 31269,
+      "answer": "3933333 19",
+      "correct": false,
+      "kv_bytes_per_token": 2459.828801365687
+    },
+    {
+      "method": "q2_tokenkeys",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.75,
+      "passkey": 51461,
+      "answer": "219 116 3",
+      "correct": false,
+      "kv_bytes_per_token": 2459.828801365687
+    },
+    {
+      "method": "q2_tokenkeys",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.85,
+      "passkey": 44281,
+      "answer": "and 19s 1998",
+      "correct": false,
+      "kv_bytes_per_token": 2459.828801365687
+    },
+    {
+      "method": "q2_tokenkeys",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.95,
+      "passkey": 67691,
+      "answer": "of 19s ( 4 @1",
+      "correct": false,
+      "kv_bytes_per_token": 2459.828801365687
+    },
+    {
+      "method": "kivi4",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.05,
+      "passkey": 41673,
+      "answer": "41673\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3976.490671869284
+    },
+    {
+      "method": "kivi4",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.15,
+      "passkey": 54050,
+      "answer": "54050\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3976.490671869284
+    },
+    {
+      "method": "kivi4",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.25,
+      "passkey": 94699,
+      "answer": "94699\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3976.490671869284
+    },
+    {
+      "method": "kivi4",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.35,
+      "passkey": 55001,
+      "answer": "55001\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3976.490671869284
+    },
+    {
+      "method": "kivi4",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.45,
+      "passkey": 12715,
+      "answer": "12715\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3976.490671869284
+    },
+    {
+      "method": "kivi4",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.55,
+      "passkey": 82213,
+      "answer": "82213\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3976.490671869284
+    },
+    {
+      "method": "kivi4",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.65,
+      "passkey": 80349,
+      "answer": "80349\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3976.490671869284
+    },
+    {
+      "method": "kivi4",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.75,
+      "passkey": 33509,
+      "answer": "33509\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3976.490671869284
+    },
+    {
+      "method": "kivi4",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.85,
+      "passkey": 68587,
+      "answer": "68587\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3976.490671869284
+    },
+    {
+      "method": "kivi4",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.95,
+      "passkey": 35853,
+      "answer": "35853\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3976.490671869284
+    },
+    {
+      "method": "kivi4",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.05,
+      "passkey": 84292,
+      "answer": "84292\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3976.490671869284
+    },
+    {
+      "method": "kivi4",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.15,
+      "passkey": 69235,
+      "answer": "69235\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3976.490671869284
+    },
+    {
+      "method": "kivi4",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.25,
+      "passkey": 18843,
+      "answer": "18843\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3976.490671869284
+    },
+    {
+      "method": "kivi4",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.35,
+      "passkey": 11789,
+      "answer": "11789\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3976.490671869284
+    },
+    {
+      "method": "kivi4",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.45,
+      "passkey": 42911,
+      "answer": "42911\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3976.490671869284
+    },
+    {
+      "method": "kivi4",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.55,
+      "passkey": 16199,
+      "answer": "16199\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3976.490671869284
+    },
+    {
+      "method": "kivi4",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.65,
+      "passkey": 66162,
+      "answer": "66162\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3976.490671869284
+    },
+    {
+      "method": "kivi4",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.75,
+      "passkey": 51518,
+      "answer": "51518\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3976.490671869284
+    },
+    {
+      "method": "kivi4",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.85,
+      "passkey": 72976,
+      "answer": "72976\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3976.490671869284
+    },
+    {
+      "method": "kivi4",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.95,
+      "passkey": 47085,
+      "answer": "47085\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3976.490671869284
+    },
+    {
+      "method": "kivi4",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.05,
+      "passkey": 51873,
+      "answer": "51873\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3976.490671869284
+    },
+    {
+      "method": "kivi4",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.15,
+      "passkey": 51988,
+      "answer": "51988\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3976.490671869284
+    },
+    {
+      "method": "kivi4",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.25,
+      "passkey": 51729,
+      "answer": "51729\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3976.490671869284
+    },
+    {
+      "method": "kivi4",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.35,
+      "passkey": 38993,
+      "answer": "38993\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3976.490671869284
+    },
+    {
+      "method": "kivi4",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.45,
+      "passkey": 94695,
+      "answer": "94695\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3976.490671869284
+    },
+    {
+      "method": "kivi4",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.55,
+      "passkey": 91668,
+      "answer": "91668\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3976.490671869284
+    },
+    {
+      "method": "kivi4",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.65,
+      "passkey": 31269,
+      "answer": "31269\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3976.490671869284
+    },
+    {
+      "method": "kivi4",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.75,
+      "passkey": 51461,
+      "answer": "51461\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3976.490671869284
+    },
+    {
+      "method": "kivi4",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.85,
+      "passkey": 44281,
+      "answer": "44281\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3976.490671869284
+    },
+    {
+      "method": "kivi4",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.95,
+      "passkey": 67691,
+      "answer": "67691\nHuman:",
+      "correct": true,
+      "kv_bytes_per_token": 3976.490671869284
+    },
+    {
+      "method": "q4_tokenkeys",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.05,
+      "passkey": 41673,
+      "answer": "Based on the text provided, what is the secret",
+      "correct": false,
+      "kv_bytes_per_token": 3971.8551396171197
+    },
+    {
+      "method": "q4_tokenkeys",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.15,
+      "passkey": 54050,
+      "answer": "I am not sure that the secret passkey is",
+      "correct": false,
+      "kv_bytes_per_token": 3971.8551396171197
+    },
+    {
+      "method": "q4_tokenkeys",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.25,
+      "passkey": 94699,
+      "answer": "I am not sure that the secret passkey is",
+      "correct": false,
+      "kv_bytes_per_token": 3971.8551396171197
+    },
+    {
+      "method": "q4_tokenkeys",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.35,
+      "passkey": 55001,
+      "answer": "Based on the text above, what is the secret",
+      "correct": false,
+      "kv_bytes_per_token": 3971.8551396171197
+    },
+    {
+      "method": "q4_tokenkeys",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.45,
+      "passkey": 12715,
+      "answer": "Based on the text provided, the answer is:",
+      "correct": false,
+      "kv_bytes_per_token": 3971.8551396171197
+    },
+    {
+      "method": "q4_tokenkeys",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.55,
+      "passkey": 82213,
+      "answer": "Based on the text above , what is the secret",
+      "correct": false,
+      "kv_bytes_per_token": 3971.8551396171197
+    },
+    {
+      "method": "q4_tokenkeys",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.65,
+      "passkey": 80349,
+      "answer": "Based on the text provided, what is the secret",
+      "correct": false,
+      "kv_bytes_per_token": 3971.8551396171197
+    },
+    {
+      "method": "q4_tokenkeys",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.75,
+      "passkey": 33509,
+      "answer": "Based on the text provided, what is the secret",
+      "correct": false,
+      "kv_bytes_per_token": 3971.8551396171197
+    },
+    {
+      "method": "q4_tokenkeys",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.85,
+      "passkey": 68587,
+      "answer": "Based on the text above, what is the secret",
+      "correct": false,
+      "kv_bytes_per_token": 3971.8551396171197
+    },
+    {
+      "method": "q4_tokenkeys",
+      "context": 8192,
+      "seed": 0,
+      "depth": 0.95,
+      "passkey": 35853,
+      "answer": "Based on the information provided in the text above ,",
+      "correct": false,
+      "kv_bytes_per_token": 3971.8551396171197
+    },
+    {
+      "method": "q4_tokenkeys",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.05,
+      "passkey": 84292,
+      "answer": "---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---",
+      "correct": false,
+      "kv_bytes_per_token": 3971.8551396171197
+    },
+    {
+      "method": "q4_tokenkeys",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.15,
+      "passkey": 69235,
+      "answer": "Assistant Director Walter Skinner ( Mitch Pileggi",
+      "correct": false,
+      "kv_bytes_per_token": 3971.8551396171197
+    },
+    {
+      "method": "q4_tokenkeys",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.25,
+      "passkey": 18843,
+      "answer": "---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---",
+      "correct": false,
+      "kv_bytes_per_token": 3971.8551396171197
+    },
+    {
+      "method": "q4_tokenkeys",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.35,
+      "passkey": 11789,
+      "answer": "Assistant Director Walter Skinner (Mitch Pileggi",
+      "correct": false,
+      "kv_bytes_per_token": 3971.8551396171197
+    },
+    {
+      "method": "q4_tokenkeys",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.45,
+      "passkey": 42911,
+      "answer": "director\nassistant\ndirector\ndirector\ndirector",
+      "correct": false,
+      "kv_bytes_per_token": 3971.8551396171197
+    },
+    {
+      "method": "q4_tokenkeys",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.55,
+      "passkey": 16199,
+      "answer": "director of the FBI (David Duchovny)",
+      "correct": false,
+      "kv_bytes_per_token": 3971.8551396171197
+    },
+    {
+      "method": "q4_tokenkeys",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.65,
+      "passkey": 66162,
+      "answer": "Director\nAssistant Director\nAssistant Director\nAssistant Dir",
+      "correct": false,
+      "kv_bytes_per_token": 3971.8551396171197
+    },
+    {
+      "method": "q4_tokenkeys",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.75,
+      "passkey": 51518,
+      "answer": "The secret passkey is 5151",
+      "correct": false,
+      "kv_bytes_per_token": 3971.8551396171197
+    },
+    {
+      "method": "q4_tokenkeys",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.85,
+      "passkey": 72976,
+      "answer": "The secret passkey is 7297",
+      "correct": false,
+      "kv_bytes_per_token": 3971.8551396171197
+    },
+    {
+      "method": "q4_tokenkeys",
+      "context": 8192,
+      "seed": 1,
+      "depth": 0.95,
+      "passkey": 47085,
+      "answer": "The secret passkey is 4708",
+      "correct": false,
+      "kv_bytes_per_token": 3971.8551396171197
+    },
+    {
+      "method": "q4_tokenkeys",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.05,
+      "passkey": 51873,
+      "answer": "",
+      "correct": false,
+      "kv_bytes_per_token": 3971.8551396171197
+    },
+    {
+      "method": "q4_tokenkeys",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.15,
+      "passkey": 51988,
+      "answer": "",
+      "correct": false,
+      "kv_bytes_per_token": 3971.8551396171197
+    },
+    {
+      "method": "q4_tokenkeys",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.25,
+      "passkey": 51729,
+      "answer": "The secret passkey is hidden in the text above",
+      "correct": false,
+      "kv_bytes_per_token": 3971.8551396171197
+    },
+    {
+      "method": "q4_tokenkeys",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.35,
+      "passkey": 38993,
+      "answer": "",
+      "correct": false,
+      "kv_bytes_per_token": 3971.8551396171197
+    },
+    {
+      "method": "q4_tokenkeys",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.45,
+      "passkey": 94695,
+      "answer": "",
+      "correct": false,
+      "kv_bytes_per_token": 3971.8551396171197
+    },
+    {
+      "method": "q4_tokenkeys",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.55,
+      "passkey": 91668,
+      "answer": "",
+      "correct": false,
+      "kv_bytes_per_token": 3971.8551396171197
+    },
+    {
+      "method": "q4_tokenkeys",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.65,
+      "passkey": 31269,
+      "answer": "",
+      "correct": false,
+      "kv_bytes_per_token": 3971.8551396171197
+    },
+    {
+      "method": "q4_tokenkeys",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.75,
+      "passkey": 51461,
+      "answer": "",
+      "correct": false,
+      "kv_bytes_per_token": 3971.8551396171197
+    },
+    {
+      "method": "q4_tokenkeys",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.85,
+      "passkey": 44281,
+      "answer": "",
+      "correct": false,
+      "kv_bytes_per_token": 3971.8551396171197
+    },
+    {
+      "method": "q4_tokenkeys",
+      "context": 8192,
+      "seed": 2,
+      "depth": 0.95,
+      "passkey": 67691,
+      "answer": "",
+      "correct": false,
+      "kv_bytes_per_token": 3971.8551396171197
+    }
+  ],
+  "timing_s": {
+    "full@8192": 26.106362718999662,
+    "kivi2@8192": 33.27890478699965,
+    "kivi2_r0@8192": 31.55895395699963,
+    "kivi2_r32@8192": 32.49347450000005,
+    "kivi2_r512@8192": 32.220273983000425,
+    "kivi2_g16@8192": 32.38943363300041,
+    "kivi2_g64@8192": 32.31914745699987,
+    "k4v2@8192": 32.37403732299981,
+    "k2v4@8192": 32.36375253599999,
+    "q2_tokenkeys@8192": 31.60973497499981,
+    "kivi4@8192": 32.166267737,
+    "q4_tokenkeys@8192": 31.532353909999983
+  },
+  "summary": {
+    "full": {
+      "8192": {
+        "accuracy": 1.0,
+        "ci95": 0.0,
+        "per_seed": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "per_depth": {
+          "0.05": 1.0,
+          "0.15": 1.0,
+          "0.25": 1.0,
+          "0.35": 1.0,
+          "0.45": 1.0,
+          "0.55": 1.0,
+          "0.65": 1.0,
+          "0.75": 1.0,
+          "0.85": 1.0,
+          "0.95": 1.0
+        },
+        "kv_bytes_per_token": 12288.0,
+        "n": 30
+      }
+    },
+    "kivi2": {
+      "8192": {
+        "accuracy": 0.6333333333333333,
+        "ci95": 0.2868666666666666,
+        "per_seed": [
+          0.7,
+          0.5,
+          0.7
+        ],
+        "per_depth": {
+          "0.05": 1.0,
+          "0.15": 0.6666666666666666,
+          "0.25": 1.0,
+          "0.35": 0.6666666666666666,
+          "0.45": 0.6666666666666666,
+          "0.55": 0.3333333333333333,
+          "0.65": 0.0,
+          "0.75": 0.3333333333333333,
+          "0.85": 0.6666666666666666,
+          "0.95": 1.0
+        },
+        "kv_bytes_per_token": 2465.3071576636994,
+        "n": 30
+      }
+    },
+    "kivi2_r0": {
+      "8192": {
+        "accuracy": 0.6,
+        "ci95": 0.49686764166459196,
+        "per_seed": [
+          0.8,
+          0.4,
+          0.6
+        ],
+        "per_depth": {
+          "0.05": 1.0,
+          "0.15": 0.6666666666666666,
+          "0.25": 1.0,
+          "0.35": 0.3333333333333333,
+          "0.45": 0.6666666666666666,
+          "0.55": 0.3333333333333333,
+          "0.65": 0.3333333333333333,
+          "0.75": 0.6666666666666666,
+          "0.85": 0.6666666666666666,
+          "0.95": 0.3333333333333333
+        },
+        "kv_bytes_per_token": 2309.4783562980124,
+        "n": 30
+      }
+    },
+    "kivi2_r32": {
+      "8192": {
+        "accuracy": 0.6333333333333333,
+        "ci95": 0.1434333333333333,
+        "per_seed": [
+          0.7,
+          0.6,
+          0.6
+        ],
+        "per_depth": {
+          "0.05": 1.0,
+          "0.15": 0.3333333333333333,
+          "0.25": 0.6666666666666666,
+          "0.35": 0.6666666666666666,
+          "0.45": 1.0,
+          "0.55": 1.0,
+          "0.65": 0.3333333333333333,
+          "0.75": 0.6666666666666666,
+          "0.85": 0.3333333333333333,
+          "0.95": 0.3333333333333333
+        },
+        "kv_bytes_per_token": 2348.4355566394343,
+        "n": 30
+      }
+    },
+    "kivi2_r512": {
+      "8192": {
+        "accuracy": 0.6666666666666666,
+        "ci95": 0.3794889297170312,
+        "per_seed": [
+          0.8,
+          0.7,
+          0.5
+        ],
+        "per_depth": {
+          "0.05": 1.0,
+          "0.15": 1.0,
+          "0.25": 0.0,
+          "0.35": 0.3333333333333333,
+          "0.45": 1.0,
+          "0.55": 0.6666666666666666,
+          "0.65": 0.6666666666666666,
+          "0.75": 1.0,
+          "0.85": 0.3333333333333333,
+          "0.95": 0.6666666666666666
+        },
+        "kv_bytes_per_token": 2932.793561760761,
+        "n": 30
+      }
+    },
+    "kivi2_g16": {
+      "8192": {
+        "accuracy": 0.9333333333333332,
+        "ci95": 0.2868666666666666,
+        "per_seed": [
+          1.0,
+          0.8,
+          1.0
+        ],
+        "per_depth": {
+          "0.05": 1.0,
+          "0.15": 1.0,
+          "0.25": 1.0,
+          "0.35": 1.0,
+          "0.45": 1.0,
+          "0.55": 1.0,
+          "0.65": 0.6666666666666666,
+          "0.75": 0.6666666666666666,
+          "0.85": 1.0,
+          "0.95": 1.0
+        },
+        "kv_bytes_per_token": 3220.898914766492,
+        "n": 30
+      }
+    },
+    "kivi2_g64": {
+      "8192": {
+        "accuracy": 0.2333333333333333,
+        "ci95": 0.7986030017752529,
+        "per_seed": [
+          0.6,
+          0.1,
+          0.0
+        ],
+        "per_depth": {
+          "0.05": 0.6666666666666666,
+          "0.15": 0.3333333333333333,
+          "0.25": 0.0,
+          "0.35": 0.0,
+          "0.45": 0.3333333333333333,
+          "0.55": 0.0,
+          "0.65": 0.0,
+          "0.75": 0.3333333333333333,
+          "0.85": 0.3333333333333333,
+          "0.95": 0.3333333333333333
+        },
+        "kv_bytes_per_token": 2087.5112791123033,
+        "n": 30
+      }
+    },
+    "k4v2": {
+      "8192": {
+        "accuracy": 1.0,
+        "ci95": 0.0,
+        "per_seed": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "per_depth": {
+          "0.05": 1.0,
+          "0.15": 1.0,
+          "0.25": 1.0,
+          "0.35": 1.0,
+          "0.45": 1.0,
+          "0.55": 1.0,
+          "0.65": 1.0,
+          "0.75": 1.0,
+          "0.85": 1.0,
+          "0.95": 1.0
+        },
+        "kv_bytes_per_token": 3220.477502743568,
+        "n": 30
+      }
+    },
+    "k2v4": {
+      "8192": {
+        "accuracy": 0.7333333333333334,
+        "ci95": 0.3794889297170312,
+        "per_seed": [
+          0.7,
+          0.9,
+          0.6
+        ],
+        "per_depth": {
+          "0.05": 1.0,
+          "0.15": 0.6666666666666666,
+          "0.25": 0.6666666666666666,
+          "0.35": 1.0,
+          "0.45": 0.6666666666666666,
+          "0.55": 0.3333333333333333,
+          "0.65": 1.0,
+          "0.75": 1.0,
+          "0.85": 0.3333333333333333,
+          "0.95": 0.6666666666666666
+        },
+        "kv_bytes_per_token": 3221.320326789416,
+        "n": 30
+      }
+    },
+    "q2_tokenkeys": {
+      "8192": {
+        "accuracy": 0.0,
+        "ci95": 0.0,
+        "per_seed": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "per_depth": {
+          "0.05": 0.0,
+          "0.15": 0.0,
+          "0.25": 0.0,
+          "0.35": 0.0,
+          "0.45": 0.0,
+          "0.55": 0.0,
+          "0.65": 0.0,
+          "0.75": 0.0,
+          "0.85": 0.0,
+          "0.95": 0.0
+        },
+        "kv_bytes_per_token": 2459.828801365687,
+        "n": 30
+      }
+    },
+    "kivi4": {
+      "8192": {
+        "accuracy": 1.0,
+        "ci95": 0.0,
+        "per_seed": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "per_depth": {
+          "0.05": 1.0,
+          "0.15": 1.0,
+          "0.25": 1.0,
+          "0.35": 1.0,
+          "0.45": 1.0,
+          "0.55": 1.0,
+          "0.65": 1.0,
+          "0.75": 1.0,
+          "0.85": 1.0,
+          "0.95": 1.0
+        },
+        "kv_bytes_per_token": 3976.490671869284,
+        "n": 30
+      }
+    },
+    "q4_tokenkeys": {
+      "8192": {
+        "accuracy": 0.0,
+        "ci95": 0.0,
+        "per_seed": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "per_depth": {
+          "0.05": 0.0,
+          "0.15": 0.0,
+          "0.25": 0.0,
+          "0.35": 0.0,
+          "0.45": 0.0,
+          "0.55": 0.0,
+          "0.65": 0.0,
+          "0.75": 0.0,
+          "0.85": 0.0,
+          "0.95": 0.0
+        },
+        "kv_bytes_per_token": 3971.8551396171197,
+        "n": 30
+      }
+    }
+  }
+}
