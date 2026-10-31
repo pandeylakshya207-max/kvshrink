@@ -1,0 +1,48 @@
+model: Qwen/Qwen2.5-0.5B-Instruct
+dtype: float16
+haystack:
+  name: Salesforce/wikitext
+  config: wikitext-2-raw-v1
+  split: train
+contexts: [4096, 8192, 16384]
+depths: [0.1, 0.3, 0.5, 0.7, 0.9]
+seeds: [0, 1, 2]
+prefill_chunk: 512
+gen_tokens: 10
+intro: "There is a secret passkey hidden somewhere in the long text below. Find it and remember it.\n\n"
+needle: "\nThe secret passkey is {key}. Remember it: the secret passkey is {key}.\n"
+question: "\n\nWhat is the secret passkey hidden in the text above? Reply with the number only."
+methods:
+  full:
+    type: full
+  int8:
+    type: quant
+    key_bits: 8
+    value_bits: 8
+  kivi4:
+    type: kivi
+    bits: 4
+    group_size: 32
+    residual: 128
+  kivi2:
+    type: kivi
+    bits: 2
+    group_size: 32
+    residual: 128
+  stream50:
+    type: streaming
+    budget_frac: 0.5
+    sink: 4
+  stream25:
+    type: streaming
+    budget_frac: 0.25
+    sink: 4
+  h2o50:
+    type: h2o
+    budget_frac: 0.5
+    recent_frac: 0.5
+  h2o25:
+    type: h2o
+    budget_frac: 0.25
+    recent_frac: 0.5
+output: results/needle_0.5b
