@@ -1,0 +1,907 @@
+{
+  "model": "Qwen/Qwen2.5-0.5B-Instruct",
+  "config": {
+    "model": "Qwen/Qwen2.5-0.5B-Instruct",
+    "dtype": "float16",
+    "dataset": {
+      "name": "Salesforce/wikitext",
+      "config": "wikitext-2-raw-v1",
+      "split": "test"
+    },
+    "window": 2048,
+    "prefix": 128,
+    "chunk": 16,
+    "num_windows": 16,
+    "batch_size": 8,
+    "methods": {
+      "full": {
+        "type": "full"
+      },
+      "kivi4": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128
+      },
+      "kivi2": {
+        "type": "kivi",
+        "bits": 2,
+        "group_size": 32,
+        "residual": 128
+      },
+      "l00_2bit": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128,
+        "layer_overrides": {
+          "0": {
+            "key_bits": 2,
+            "value_bits": 2
+          }
+        }
+      },
+      "l01_2bit": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128,
+        "layer_overrides": {
+          "1": {
+            "key_bits": 2,
+            "value_bits": 2
+          }
+        }
+      },
+      "l02_2bit": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128,
+        "layer_overrides": {
+          "2": {
+            "key_bits": 2,
+            "value_bits": 2
+          }
+        }
+      },
+      "l03_2bit": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128,
+        "layer_overrides": {
+          "3": {
+            "key_bits": 2,
+            "value_bits": 2
+          }
+        }
+      },
+      "l04_2bit": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128,
+        "layer_overrides": {
+          "4": {
+            "key_bits": 2,
+            "value_bits": 2
+          }
+        }
+      },
+      "l05_2bit": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128,
+        "layer_overrides": {
+          "5": {
+            "key_bits": 2,
+            "value_bits": 2
+          }
+        }
+      },
+      "l06_2bit": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128,
+        "layer_overrides": {
+          "6": {
+            "key_bits": 2,
+            "value_bits": 2
+          }
+        }
+      },
+      "l07_2bit": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128,
+        "layer_overrides": {
+          "7": {
+            "key_bits": 2,
+            "value_bits": 2
+          }
+        }
+      },
+      "l08_2bit": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128,
+        "layer_overrides": {
+          "8": {
+            "key_bits": 2,
+            "value_bits": 2
+          }
+        }
+      },
+      "l09_2bit": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128,
+        "layer_overrides": {
+          "9": {
+            "key_bits": 2,
+            "value_bits": 2
+          }
+        }
+      },
+      "l10_2bit": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128,
+        "layer_overrides": {
+          "10": {
+            "key_bits": 2,
+            "value_bits": 2
+          }
+        }
+      },
+      "l11_2bit": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128,
+        "layer_overrides": {
+          "11": {
+            "key_bits": 2,
+            "value_bits": 2
+          }
+        }
+      },
+      "l12_2bit": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128,
+        "layer_overrides": {
+          "12": {
+            "key_bits": 2,
+            "value_bits": 2
+          }
+        }
+      },
+      "l13_2bit": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128,
+        "layer_overrides": {
+          "13": {
+            "key_bits": 2,
+            "value_bits": 2
+          }
+        }
+      },
+      "l14_2bit": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128,
+        "layer_overrides": {
+          "14": {
+            "key_bits": 2,
+            "value_bits": 2
+          }
+        }
+      },
+      "l15_2bit": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128,
+        "layer_overrides": {
+          "15": {
+            "key_bits": 2,
+            "value_bits": 2
+          }
+        }
+      },
+      "l16_2bit": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128,
+        "layer_overrides": {
+          "16": {
+            "key_bits": 2,
+            "value_bits": 2
+          }
+        }
+      },
+      "l17_2bit": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128,
+        "layer_overrides": {
+          "17": {
+            "key_bits": 2,
+            "value_bits": 2
+          }
+        }
+      },
+      "l18_2bit": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128,
+        "layer_overrides": {
+          "18": {
+            "key_bits": 2,
+            "value_bits": 2
+          }
+        }
+      },
+      "l19_2bit": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128,
+        "layer_overrides": {
+          "19": {
+            "key_bits": 2,
+            "value_bits": 2
+          }
+        }
+      },
+      "l20_2bit": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128,
+        "layer_overrides": {
+          "20": {
+            "key_bits": 2,
+            "value_bits": 2
+          }
+        }
+      },
+      "l21_2bit": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128,
+        "layer_overrides": {
+          "21": {
+            "key_bits": 2,
+            "value_bits": 2
+          }
+        }
+      },
+      "l22_2bit": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128,
+        "layer_overrides": {
+          "22": {
+            "key_bits": 2,
+            "value_bits": 2
+          }
+        }
+      },
+      "l23_2bit": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128,
+        "layer_overrides": {
+          "23": {
+            "key_bits": 2,
+            "value_bits": 2
+          }
+        }
+      }
+    },
+    "output": "results/layer_sensitivity_0.5b"
+  },
+  "env": {
+    "gpu": "Tesla T4",
+    "torch": "2.11.0+cu130",
+    "transformers": "5.22.1",
+    "python": "3.13.16",
+    "timestamp": "2026-10-31T19:56:28+00:00"
+  },
+  "n_windows": 16,
+  "scored_tokens_per_window": 1920,
+  "methods": {
+    "full": {
+      "spec": {
+        "type": "full"
+      },
+      "ppl": 13.089626613422613,
+      "nll_per_token": 2.57182005494833,
+      "scored_tokens": 30720,
+      "kv_bytes_per_token": 12288.0,
+      "peak_allocated_mib": 1412.88671875,
+      "seconds": 7.349831122000069,
+      "delta_ppl": 0.0,
+      "compression": 1.0
+    },
+    "kivi4": {
+      "spec": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128
+      },
+      "ppl": 13.143007283191931,
+      "nll_per_token": 2.575889851649602,
+      "scored_tokens": 30720,
+      "kv_bytes_per_token": 4368.0,
+      "peak_allocated_mib": 1293.63671875,
+      "seconds": 14.696527703999891,
+      "delta_ppl": 0.05338066976931799,
+      "compression": 2.8131868131868134
+    },
+    "kivi2": {
+      "spec": {
+        "type": "kivi",
+        "bits": 2,
+        "group_size": 32,
+        "residual": 128
+      },
+      "ppl": 16.613854837976916,
+      "nll_per_token": 2.810236976047357,
+      "scored_tokens": 30720,
+      "kv_bytes_per_token": 2928.0,
+      "peak_allocated_mib": 1269.63671875,
+      "seconds": 16.152283560000342,
+      "delta_ppl": 3.524228224554303,
+      "compression": 4.19672131147541
+    },
+    "l00_2bit": {
+      "spec": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128,
+        "layer_overrides": {
+          "0": {
+            "key_bits": 2,
+            "value_bits": 2
+          }
+        }
+      },
+      "ppl": 13.150529728365196,
+      "nll_per_token": 2.5764620413382846,
+      "scored_tokens": 30720,
+      "kv_bytes_per_token": 4308.0,
+      "peak_allocated_mib": 1292.63671875,
+      "seconds": 14.58232030299996,
+      "delta_ppl": 0.06090311494258316,
+      "compression": 2.852367688022284
+    },
+    "l01_2bit": {
+      "spec": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128,
+        "layer_overrides": {
+          "1": {
+            "key_bits": 2,
+            "value_bits": 2
+          }
+        }
+      },
+      "ppl": 13.139301549402271,
+      "nll_per_token": 2.5756078571081162,
+      "scored_tokens": 30720,
+      "kv_bytes_per_token": 4308.0,
+      "peak_allocated_mib": 1292.63671875,
+      "seconds": 14.830143834999944,
+      "delta_ppl": 0.049674935979657775,
+      "compression": 2.852367688022284
+    },
+    "l02_2bit": {
+      "spec": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128,
+        "layer_overrides": {
+          "2": {
+            "key_bits": 2,
+            "value_bits": 2
+          }
+        }
+      },
+      "ppl": 13.157856416937177,
+      "nll_per_token": 2.5770190263787907,
+      "scored_tokens": 30720,
+      "kv_bytes_per_token": 4308.0,
+      "peak_allocated_mib": 1292.63671875,
+      "seconds": 14.673009216000082,
+      "delta_ppl": 0.06822980351456387,
+      "compression": 2.852367688022284
+    },
+    "l03_2bit": {
+      "spec": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128,
+        "layer_overrides": {
+          "3": {
+            "key_bits": 2,
+            "value_bits": 2
+          }
+        }
+      },
+      "ppl": 13.23360452336826,
+      "nll_per_token": 2.5827593917648,
+      "scored_tokens": 30720,
+      "kv_bytes_per_token": 4308.0,
+      "peak_allocated_mib": 1292.63671875,
+      "seconds": 14.829178709999724,
+      "delta_ppl": 0.1439779099456473,
+      "compression": 2.852367688022284
+    },
+    "l04_2bit": {
+      "spec": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128,
+        "layer_overrides": {
+          "4": {
+            "key_bits": 2,
+            "value_bits": 2
+          }
+        }
+      },
+      "ppl": 13.207414025296142,
+      "nll_per_token": 2.580778340498606,
+      "scored_tokens": 30720,
+      "kv_bytes_per_token": 4308.0,
+      "peak_allocated_mib": 1292.63671875,
+      "seconds": 14.788845881999805,
+      "delta_ppl": 0.11778741187352892,
+      "compression": 2.852367688022284
+    },
+    "l05_2bit": {
+      "spec": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128,
+        "layer_overrides": {
+          "5": {
+            "key_bits": 2,
+            "value_bits": 2
+          }
+        }
+      },
+      "ppl": 13.172859206894485,
+      "nll_per_token": 2.578158592184385,
+      "scored_tokens": 30720,
+      "kv_bytes_per_token": 4308.0,
+      "peak_allocated_mib": 1292.63671875,
+      "seconds": 14.952367986999889,
+      "delta_ppl": 0.0832325934718714,
+      "compression": 2.852367688022284
+    },
+    "l06_2bit": {
+      "spec": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128,
+        "layer_overrides": {
+          "6": {
+            "key_bits": 2,
+            "value_bits": 2
+          }
+        }
+      },
+      "ppl": 13.200680313048462,
+      "nll_per_token": 2.580268367131551,
+      "scored_tokens": 30720,
+      "kv_bytes_per_token": 4308.0,
+      "peak_allocated_mib": 1292.63671875,
+      "seconds": 14.730564335000054,
+      "delta_ppl": 0.11105369962584888,
+      "compression": 2.852367688022284
+    },
+    "l07_2bit": {
+      "spec": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128,
+        "layer_overrides": {
+          "7": {
+            "key_bits": 2,
+            "value_bits": 2
+          }
+        }
+      },
+      "ppl": 13.204092708674013,
+      "nll_per_token": 2.580526835223039,
+      "scored_tokens": 30720,
+      "kv_bytes_per_token": 4308.0,
+      "peak_allocated_mib": 1292.63671875,
+      "seconds": 14.854781156000172,
+      "delta_ppl": 0.11446609525139984,
+      "compression": 2.852367688022284
+    },
+    "l08_2bit": {
+      "spec": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128,
+        "layer_overrides": {
+          "8": {
+            "key_bits": 2,
+            "value_bits": 2
+          }
+        }
+      },
+      "ppl": 13.222800868671538,
+      "nll_per_token": 2.581942677994569,
+      "scored_tokens": 30720,
+      "kv_bytes_per_token": 4308.0,
+      "peak_allocated_mib": 1292.63671875,
+      "seconds": 14.777075486000285,
+      "delta_ppl": 0.13317425524892457,
+      "compression": 2.852367688022284
+    },
+    "l09_2bit": {
+      "spec": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128,
+        "layer_overrides": {
+          "9": {
+            "key_bits": 2,
+            "value_bits": 2
+          }
+        }
+      },
+      "ppl": 13.443624675197299,
+      "nll_per_token": 2.598504991829395,
+      "scored_tokens": 30720,
+      "kv_bytes_per_token": 4308.0,
+      "peak_allocated_mib": 1292.63671875,
+      "seconds": 15.097042337999937,
+      "delta_ppl": 0.3539980617746856,
+      "compression": 2.852367688022284
+    },
+    "l10_2bit": {
+      "spec": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128,
+        "layer_overrides": {
+          "10": {
+            "key_bits": 2,
+            "value_bits": 2
+          }
+        }
+      },
+      "ppl": 13.285897714508973,
+      "nll_per_token": 2.5867031504710516,
+      "scored_tokens": 30720,
+      "kv_bytes_per_token": 4308.0,
+      "peak_allocated_mib": 1292.63671875,
+      "seconds": 14.934147512999516,
+      "delta_ppl": 0.19627110108636003,
+      "compression": 2.852367688022284
+    },
+    "l11_2bit": {
+      "spec": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128,
+        "layer_overrides": {
+          "11": {
+            "key_bits": 2,
+            "value_bits": 2
+          }
+        }
+      },
+      "ppl": 13.338634757270553,
+      "nll_per_token": 2.5906646932164827,
+      "scored_tokens": 30720,
+      "kv_bytes_per_token": 4308.0,
+      "peak_allocated_mib": 1292.63671875,
+      "seconds": 14.79489031600042,
+      "delta_ppl": 0.24900814384793968,
+      "compression": 2.852367688022284
+    },
+    "l12_2bit": {
+      "spec": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128,
+        "layer_overrides": {
+          "12": {
+            "key_bits": 2,
+            "value_bits": 2
+          }
+        }
+      },
+      "ppl": 13.169279327803329,
+      "nll_per_token": 2.5778867935140926,
+      "scored_tokens": 30720,
+      "kv_bytes_per_token": 4308.0,
+      "peak_allocated_mib": 1292.63671875,
+      "seconds": 14.79733947800014,
+      "delta_ppl": 0.07965271438071575,
+      "compression": 2.852367688022284
+    },
+    "l13_2bit": {
+      "spec": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128,
+        "layer_overrides": {
+          "13": {
+            "key_bits": 2,
+            "value_bits": 2
+          }
+        }
+      },
+      "ppl": 13.20312053872491,
+      "nll_per_token": 2.5804532061020535,
+      "scored_tokens": 30720,
+      "kv_bytes_per_token": 4308.0,
+      "peak_allocated_mib": 1292.63671875,
+      "seconds": 14.657006798000111,
+      "delta_ppl": 0.11349392530229707,
+      "compression": 2.852367688022284
+    },
+    "l14_2bit": {
+      "spec": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128,
+        "layer_overrides": {
+          "14": {
+            "key_bits": 2,
+            "value_bits": 2
+          }
+        }
+      },
+      "ppl": 13.190461664227424,
+      "nll_per_token": 2.579493967195352,
+      "scored_tokens": 30720,
+      "kv_bytes_per_token": 4308.0,
+      "peak_allocated_mib": 1292.63671875,
+      "seconds": 14.76397521799936,
+      "delta_ppl": 0.10083505080481103,
+      "compression": 2.852367688022284
+    },
+    "l15_2bit": {
+      "spec": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128,
+        "layer_overrides": {
+          "15": {
+            "key_bits": 2,
+            "value_bits": 2
+          }
+        }
+      },
+      "ppl": 13.215975076306686,
+      "nll_per_token": 2.581426330904166,
+      "scored_tokens": 30720,
+      "kv_bytes_per_token": 4308.0,
+      "peak_allocated_mib": 1292.63671875,
+      "seconds": 14.734987828999692,
+      "delta_ppl": 0.12634846288407253,
+      "compression": 2.852367688022284
+    },
+    "l16_2bit": {
+      "spec": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128,
+        "layer_overrides": {
+          "16": {
+            "key_bits": 2,
+            "value_bits": 2
+          }
+        }
+      },
+      "ppl": 13.42862195969715,
+      "nll_per_token": 2.5973883961637814,
+      "scored_tokens": 30720,
+      "kv_bytes_per_token": 4308.0,
+      "peak_allocated_mib": 1292.63671875,
+      "seconds": 14.668921622000198,
+      "delta_ppl": 0.33899534627453676,
+      "compression": 2.852367688022284
+    },
+    "l17_2bit": {
+      "spec": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128,
+        "layer_overrides": {
+          "17": {
+            "key_bits": 2,
+            "value_bits": 2
+          }
+        }
+      },
+      "ppl": 13.157715510630382,
+      "nll_per_token": 2.5770083174109457,
+      "scored_tokens": 30720,
+      "kv_bytes_per_token": 4308.0,
+      "peak_allocated_mib": 1292.63671875,
+      "seconds": 14.79203535600027,
+      "delta_ppl": 0.0680888972077689,
+      "compression": 2.852367688022284
+    },
+    "l18_2bit": {
+      "spec": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128,
+        "layer_overrides": {
+          "18": {
+            "key_bits": 2,
+            "value_bits": 2
+          }
+        }
+      },
+      "ppl": 13.162485871267734,
+      "nll_per_token": 2.5773708040515584,
+      "scored_tokens": 30720,
+      "kv_bytes_per_token": 4308.0,
+      "peak_allocated_mib": 1292.63671875,
+      "seconds": 14.851954308000131,
+      "delta_ppl": 0.0728592578451206,
+      "compression": 2.852367688022284
+    },
+    "l19_2bit": {
+      "spec": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128,
+        "layer_overrides": {
+          "19": {
+            "key_bits": 2,
+            "value_bits": 2
+          }
+        }
+      },
+      "ppl": 13.17271833621295,
+      "nll_per_token": 2.578147898117701,
+      "scored_tokens": 30720,
+      "kv_bytes_per_token": 4308.0,
+      "peak_allocated_mib": 1292.63671875,
+      "seconds": 14.726246400000491,
+      "delta_ppl": 0.08309172279033739,
+      "compression": 2.852367688022284
+    },
+    "l20_2bit": {
+      "spec": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128,
+        "layer_overrides": {
+          "20": {
+            "key_bits": 2,
+            "value_bits": 2
+          }
+        }
+      },
+      "ppl": 13.238389141371332,
+      "nll_per_token": 2.5831208770473797,
+      "scored_tokens": 30720,
+      "kv_bytes_per_token": 4308.0,
+      "peak_allocated_mib": 1292.63671875,
+      "seconds": 14.554261418999886,
+      "delta_ppl": 0.14876252794871903,
+      "compression": 2.852367688022284
+    },
+    "l21_2bit": {
+      "spec": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128,
+        "layer_overrides": {
+          "21": {
+            "key_bits": 2,
+            "value_bits": 2
+          }
+        }
+      },
+      "ppl": 13.248885748104517,
+      "nll_per_token": 2.583913454413414,
+      "scored_tokens": 30720,
+      "kv_bytes_per_token": 4308.0,
+      "peak_allocated_mib": 1292.63671875,
+      "seconds": 14.790262272000291,
+      "delta_ppl": 0.15925913468190345,
+      "compression": 2.852367688022284
+    },
+    "l22_2bit": {
+      "spec": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128,
+        "layer_overrides": {
+          "22": {
+            "key_bits": 2,
+            "value_bits": 2
+          }
+        }
+      },
+      "ppl": 13.230777106057813,
+      "nll_per_token": 2.582545714577039,
+      "scored_tokens": 30720,
+      "kv_bytes_per_token": 4308.0,
+      "peak_allocated_mib": 1292.63671875,
+      "seconds": 14.82075292799982,
+      "delta_ppl": 0.14115049263519985,
+      "compression": 2.852367688022284
+    },
+    "l23_2bit": {
+      "spec": {
+        "type": "kivi",
+        "bits": 4,
+        "group_size": 32,
+        "residual": 128,
+        "layer_overrides": {
+          "23": {
+            "key_bits": 2,
+            "value_bits": 2
+          }
+        }
+      },
+      "ppl": 13.164871595486765,
+      "nll_per_token": 2.5775520394245786,
+      "scored_tokens": 30720,
+      "kv_bytes_per_token": 4308.0,
+      "peak_allocated_mib": 1292.63671875,
+      "seconds": 14.646154907999517,
+      "delta_ppl": 0.07524498206415231,
+      "compression": 2.852367688022284
+    }
+  }
+}

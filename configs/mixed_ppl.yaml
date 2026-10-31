@@ -1,0 +1,76 @@
+model: Qwen/Qwen2.5-0.5B-Instruct
+dtype: float16
+dataset:
+  name: Salesforce/wikitext
+  config: wikitext-2-raw-v1
+  split: validation
+window: 2048
+prefix: 128
+chunk: 16
+num_windows: 16
+batch_size: 8
+methods:
+  full:
+    type: full
+  kivi4:
+    type: kivi
+    bits: 4
+    group_size: 32
+    residual: 128
+  kivi2:
+    type: kivi
+    bits: 2
+    group_size: 32
+    residual: 128
+  k4v2:
+    type: quant
+    key_bits: 4
+    value_bits: 2
+    key_mode: channel
+    value_mode: token
+    key_group: 32
+    value_group: 32
+    residual: 128
+  mixed12:
+    type: kivi
+    bits: 4
+    group_size: 32
+    residual: 128
+    layer_overrides:
+      0:
+        key_bits: 2
+        value_bits: 2
+      1:
+        key_bits: 2
+        value_bits: 2
+      2:
+        key_bits: 2
+        value_bits: 2
+      5:
+        key_bits: 2
+        value_bits: 2
+      6:
+        key_bits: 2
+        value_bits: 2
+      12:
+        key_bits: 2
+        value_bits: 2
+      13:
+        key_bits: 2
+        value_bits: 2
+      14:
+        key_bits: 2
+        value_bits: 2
+      17:
+        key_bits: 2
+        value_bits: 2
+      18:
+        key_bits: 2
+        value_bits: 2
+      19:
+        key_bits: 2
+        value_bits: 2
+      23:
+        key_bits: 2
+        value_bits: 2
+output: results/mixed_ppl_val_0.5b
